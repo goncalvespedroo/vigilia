@@ -1,0 +1,127 @@
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--c-fundo);
+  color: var(--c-texto);
+  font-family: var(--f-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+input[type='checkbox'] { accent-color: var(--c-destaque); }
+
+:focus-visible {
+  outline: 2px solid var(--c-destaque);
+  outline-offset: 2px;
+}
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.mono {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--c-texto-2);
+}
+
+.card {
+  background: var(--c-painel);
+  border: 1px solid var(--c-borda);
+  border-radius: var(--r-card);
+  padding: var(--e-5);
+}
+
+.btn {
+  min-height: var(--toque);
+  padding: 0 var(--e-4);
+  border-radius: var(--r-pilula);
+  border: 1px solid var(--c-borda);
+  background: transparent;
+  cursor: pointer;
+  font-weight: 500;
+}
+.btn--destaque {
+  background: var(--c-destaque);
+  border-color: var(--c-destaque);
+  color: var(--c-sobre-destaque);
+  font-weight: 600;
+}
+
+.carimbo {
+  font-family: var(--f-carimbo);
+  color: var(--c-destaque);
+  border: 2px solid var(--c-destaque);
+  padding: 6px 14px;
+  letter-spacing: 0.18em;
+  transform: rotate(-4deg);
+  display: inline-block;
+}
+
+.aviso-falha {
+  position: fixed;
+  left: 50%;
+  bottom: calc(24px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  width: min(480px, calc(100vw - 32px));
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--e-3) var(--e-4);
+  background: var(--c-painel-2);
+  border: 1px solid var(--c-destaque);
+  border-radius: var(--r-interno);
+  font-size: 14px;
+  z-index: 200;
+}
+@media (max-width: 720px) {
+  .aviso-falha { bottom: calc(100px + env(safe-area-inset-bottom)); }
+}
+
+/* Selo de prazo/tipo reutilizado em cartões e listas */
+.selo {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: var(--r-pilula);
+  border: 1px solid var(--c-borda-forte);
+  color: var(--c-texto-2);
+  white-space: nowrap;
+}
+.selo--atrasada { background: var(--c-destaque); border-color: var(--c-destaque); color: var(--c-sobre-destaque); }
+.selo--hoje { border-color: var(--c-destaque); color: var(--c-destaque); }
+.selo--andamento { border-color: var(--c-andamento); color: var(--c-andamento); }
+
+.ponto-area {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  flex: none;
+  display: inline-block;
+}
+
+.btn:disabled { opacity: 0.4; cursor: default; }

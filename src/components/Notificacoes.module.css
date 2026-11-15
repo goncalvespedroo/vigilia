@@ -1,0 +1,26 @@
+.titulo { margin: 0; font-size: 22px; font-weight: 600; }
+.estado {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: var(--e-3) var(--e-4); border-radius: var(--r-interno);
+  background: var(--c-painel-2); border: 1px solid var(--c-borda); font-size: 14px; line-height: 1.45;
+}
+.estado[data-estado='ativo'] .mono { color: var(--c-texto); }
+.estado[data-estado='bloqueado'], .estado[data-estado='sem_chave'], .estado[data-estado='sem_suporte'] { border-color: var(--c-destaque); }
+.estado[data-estado='bloqueado'] .mono, .estado[data-estado='sem_chave'] .mono, .estado[data-estado='sem_suporte'] .mono { color: var(--c-destaque); }
+.estado[data-estado='requer_instalacao'] { border-color: var(--c-andamento); }
+.estado[data-estado='requer_instalacao'] .mono { color: var(--c-andamento); }
+.botoes { display: flex; flex-wrap: wrap; gap: var(--e-2); }
+.botoes:empty { display: none; }
+.msg { margin: 0; font-size: 14px; padding: var(--e-2) var(--e-3); border-radius: var(--r-interno); border: 1px solid var(--c-borda); }
+.msg[data-tipo='erro'] { border-color: var(--c-destaque); color: var(--c-destaque); }
+.secao { display: flex; flex-direction: column; gap: var(--e-2); border-top: 1px solid var(--c-divisor); padding-top: var(--e-4); }
+.regras { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: var(--c-texto-2); }
+.regras strong { color: var(--c-texto); font-weight: 600; }
+.nota { font-size: 12px; color: var(--c-texto-2); }
+.dispositivo { display: flex; justify-content: space-between; align-items: center; min-height: var(--toque); font-size: 14px; }
+.este { font-family: var(--f-mono); font-size: 11px; color: var(--c-destaque); }
+.remover {
+  min-height: 36px; padding: 0 12px; border-radius: var(--r-pilula); cursor: pointer;
+  background: transparent; border: 1px solid var(--c-borda); font-size: 13px; color: var(--c-texto-2);
+}
+.remover:hover { border-color: var(--c-destaque); color: var(--c-destaque); }

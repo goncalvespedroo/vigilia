@@ -1,0 +1,21 @@
+.cabeca { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--e-3); }
+.cabecaTexto { display: flex; flex-direction: column; gap: var(--e-2); }
+.titulo { margin: 0; font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.02em; line-height: 1.05; }
+.alternador, .filtros {
+  display: flex; gap: 4px; padding: 4px;
+  background: var(--c-painel); border: 1px solid var(--c-borda); border-radius: var(--r-pilula);
+}
+.alternador button, .filtros button {
+  display: flex; align-items: center; gap: 8px;
+  min-height: 40px; padding: 0 var(--e-4);
+  border: 0; border-radius: var(--r-pilula); background: transparent; cursor: pointer;
+  font-size: 14px; white-space: nowrap;
+}
+.ativo { background: var(--c-texto) !important; color: var(--c-fundo); font-weight: 600; }
+.filtros { align-self: flex-start; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.filtroAtivo { background: var(--c-painel-2) !important; outline: 1px solid var(--c-borda-forte); font-weight: 600; }
+.erro { margin: 0; color: var(--c-destaque); }
+
+.tituloLinha { display: flex; flex-wrap: wrap; align-items: center; gap: var(--e-3); }
+.nova { color: var(--c-texto-2); border: 1px dashed var(--c-borda-forte) !important; }
+.nova:hover { color: var(--c-texto); }

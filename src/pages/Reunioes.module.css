@@ -1,0 +1,33 @@
+.cabeca { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--e-3); }
+.cabecaTexto { display: flex; flex-direction: column; gap: var(--e-2); }
+.titulo { margin: 0; font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.02em; line-height: 1.05; }
+.vazio { display: flex; flex-direction: column; align-items: flex-start; gap: var(--e-3); max-width: 620px; }
+.vazio p { margin: 0; color: var(--c-texto-2); line-height: 1.5; }
+.secao { display: flex; flex-direction: column; gap: var(--e-3); }
+.h2 { margin: 0; font-size: 17px; font-weight: 600; cursor: default; }
+summary.h2 { cursor: pointer; }
+details[open] > summary.h2 { margin-bottom: var(--e-3); }
+.lista { display: flex; flex-direction: column; gap: var(--e-3); max-width: 900px; }
+.cartao { display: flex; align-items: center; gap: var(--e-4); padding: var(--e-4); }
+.cartao:hover { border-color: var(--c-borda-forte); }
+.cartao[data-sit='hoje'], .cartao[data-sit='em_andamento'] { border-color: var(--c-destaque); }
+.cartao[data-sit='cancelada'] { opacity: 0.5; }
+.data {
+  width: 60px; flex: none; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: var(--e-2) 0; border-right: 1px solid var(--c-borda);
+}
+.dia { font-size: 26px; font-weight: 700; line-height: 1; }
+.corpo { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.nome { font-size: 17px; overflow-wrap: anywhere; }
+.cartao[data-sit='cancelada'] .nome { text-decoration: line-through; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px; }
+.pilula {
+  flex: none; font-family: var(--f-mono); font-size: 11px; padding: 5px 10px; border-radius: var(--r-pilula);
+  border: 1px solid var(--c-borda-forte); white-space: nowrap;
+}
+.pilula[data-sit='hoje'], .pilula[data-sit='em_andamento'] { background: var(--c-destaque); border-color: var(--c-destaque); color: var(--c-sobre-destaque); }
+.pilula[data-sit='aguardando_ata'] { border-color: var(--c-andamento); color: var(--c-andamento); }
+@media (max-width: 560px) {
+  .cartao { flex-wrap: wrap; }
+  .pilula { order: -1; margin-left: auto; }
+}

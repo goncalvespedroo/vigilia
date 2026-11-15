@@ -1,0 +1,2 @@
+.texto.texto { font-family: var(--f-mono); font-size: 13px; line-height: 1.5; min-height: 200px; }
+.whats { display: inline-flex; align-items: center; }

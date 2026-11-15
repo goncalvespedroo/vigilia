@@ -1,0 +1,29 @@
+.captura { display: flex; flex-direction: column; gap: var(--e-2); }
+.linha {
+  display: flex;
+  align-items: center;
+  gap: var(--e-2);
+  min-height: 52px;
+  padding: 4px 4px 4px var(--e-4);
+  background: var(--c-painel-2);
+  border: 1px dashed var(--c-borda-forte);
+  border-radius: var(--r-pilula);
+}
+.linha:focus-within { border-style: solid; border-color: var(--c-texto-2); }
+.mais { color: var(--c-texto-2); font-size: 20px; }
+.linha input {
+  flex: 1;
+  min-width: 0;
+  height: var(--toque);
+  background: transparent;
+  border: 0;
+  outline: none;
+  font-size: 16px;
+}
+.linha button:disabled { opacity: 0.4; cursor: default; }
+.dicas { display: flex; flex-wrap: wrap; gap: 6px; min-height: 22px; padding-left: var(--e-4); }
+
+.compacta .linha { min-height: 46px; border-radius: 12px; }
+.compacta .linha input { font-size: 14px; height: 38px; }
+.compacta .linha button { min-height: 36px; padding: 0 12px; font-size: 13px; }
+.compacta .dicas { padding-left: 0; min-height: 0; }

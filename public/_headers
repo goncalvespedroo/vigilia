@@ -1,0 +1,22 @@
+# Cabeçalhos do Cloudflare Pages.
+
+# Service worker, manifesto e HTML: sempre revalidar, para o app atualizar sem atraso.
+/sw.js
+  Cache-Control: no-cache
+/manifest.webmanifest
+  Cache-Control: no-cache
+/
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache
+
+# Arquivos com hash no nome nunca mudam: cache longo.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Segurança básica em todas as respostas.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()

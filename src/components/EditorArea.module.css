@@ -1,0 +1,27 @@
+.nome.nome { font-size: 18px; font-weight: 600; }
+.cores { border: 0; margin: 0; padding: 0; }
+.cores legend { padding: 0; margin-bottom: 6px; }
+.paleta { display: flex; flex-wrap: wrap; gap: 6px; }
+.amostra {
+  width: 36px; height: 36px; border-radius: var(--r-pilula); cursor: pointer;
+  position: relative; display: grid; place-items: center;
+}
+/* alvo de toque de 44px */
+.amostra::after { content: ''; position: absolute; inset: -4px; }
+.amostra[data-ativa] { box-shadow: 0 0 0 3px var(--c-painel), 0 0 0 5px var(--c-texto); }
+.amostra[data-ativa]::before {
+  content: ''; width: 10px; height: 6px; margin-top: -3px;
+  border: solid var(--c-fundo); border-width: 0 0 2.5px 2.5px; transform: rotate(-45deg);
+}
+.amostra:focus-within { outline: 2px solid var(--c-destaque); outline-offset: 2px; }
+.arquivar {
+  display: flex; gap: var(--e-3); align-items: flex-start; cursor: pointer;
+  padding: var(--e-3); border: 1px solid var(--c-borda); border-radius: var(--r-interno); background: var(--c-painel-2);
+}
+.arquivar input { width: 20px; height: 20px; margin: 1px 0 0; flex: none; }
+.arquivar > span { display: flex; flex-direction: column; gap: 2px; font-size: 14px; }
+.ajuda { color: var(--c-texto-2); font-size: 13px; }
+.alerta {
+  margin: 0; padding: var(--e-3) var(--e-4); font-size: 14px; line-height: 1.4;
+  border: 1px solid var(--c-destaque); border-radius: var(--r-interno); color: var(--c-texto);
+}

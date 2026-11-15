@@ -1,0 +1,37 @@
+:root {
+  /* Superfícies */
+  --c-fundo: #0b0b0a;
+  --c-painel: #141412;
+  --c-painel-2: #1b1a17;
+  --c-borda: #2b2925;
+  --c-borda-forte: #45423b;
+  --c-divisor: #201f1c;
+
+  /* Texto */
+  --c-texto: #ece7dc;
+  --c-texto-2: #9c968a;
+
+  /* Estados */
+  --c-destaque: #e5484d;
+  --c-sobre-destaque: #0b0b0a;
+  --c-andamento: #e2a336;
+
+  /* Tipografia */
+  --f-ui: 'Space Grotesk', system-ui, sans-serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --f-carimbo: 'Special Elite', var(--f-mono);
+
+  /* Forma */
+  --r-card: 18px;
+  --r-interno: 14px;
+  --r-pilula: 999px;
+  --toque: 44px;
+
+  /* Espaçamento */
+  --e-1: 4px;
+  --e-2: 8px;
+  --e-3: 12px;
+  --e-4: 16px;
+  --e-5: 20px;
+  --e-6: 32px;
+}

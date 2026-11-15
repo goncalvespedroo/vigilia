@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Vigília — Painel</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Special+Elite&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0B0A}
+a{color:#ECE7DC;text-decoration:none}a:hover{color:#FFFFFF}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+input[type=checkbox]{accent-color:#E5484D}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #0B0B0A; color: #ECE7DC; font-family: 'Space Grotesk', system-ui, sans-serif; box-sizing: border-box; padding: 20px clamp(16px, 3vw, 32px) 40px">
+<div style="max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px">
+
+<!-- Cabeçalho -->
+<header style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; justify-content: space-between">
+  <div style="display: flex; align-items: center; gap: 12px">
+    <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="{{accent}}" stroke-width="1.6">
+      <circle cx="20" cy="20" r="18"></circle>
+      <circle cx="20" cy="20" r="12" stroke-dasharray="2 3"></circle>
+      <path d="M8 20 Q20 9 32 20 Q20 31 8 20 Z"></path>
+      <line x1="20" y1="14" x2="20" y2="26" stroke-width="2.4"></line>
+    </svg>
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 20px; font-weight: 700; letter-spacing: 0.32em">VIGÍLIA</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9C968A; letter-spacing: 0.12em">SISTEMA DE OPERAÇÕES</span>
+    </div>
+  </div>
+
+  <nav aria-label="Principal" style="display: flex; flex-wrap: wrap; gap: 4px; background: #141412; border: 1px solid #2B2925; border-radius: 999px; padding: 5px">
+    <a href="#" aria-current="page" style="padding: 10px 16px; border-radius: 999px; background: {{accent}}; color: #0B0B0A; font-size: 14px; font-weight: 600">Painel</a>
+    <a href="#" style="padding: 10px 16px; border-radius: 999px; font-size: 14px">Operações</a>
+    <a href="#" style="padding: 10px 16px; border-radius: 999px; font-size: 14px">Dossiês</a>
+    <a href="#" style="padding: 10px 16px; border-radius: 999px; font-size: 14px">Reuniões</a>
+    <a href="#" style="padding: 10px 16px; border-radius: 999px; font-size: 14px">Calendário</a>
+    <a href="#" style="padding: 10px 16px; border-radius: 999px; font-size: 14px">Agentes</a>
+    <a href="#" style="padding: 10px 16px; border-radius: 999px; font-size: 14px">Cofre</a>
+  </nav>
+
+  <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+    <label style="display: flex; align-items: center; gap: 8px; background: #141412; border: 1px solid #2B2925; border-radius: 999px; padding: 0 14px; height: 44px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9C968A" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
+      <span class="sr">Buscar</span>
+      <input type="search" placeholder="Buscar operação ou código" style="background: transparent; border: 0; outline: none; color: #ECE7DC; font-family: 'IBM Plex Mono', monospace; font-size: 13px; width: 190px">
+    </label>
+    <button aria-label="Configurações" style="width: 44px; height: 44px; border-radius: 999px; background: #141412; border: 1px solid #2B2925; display: grid; place-items: center; cursor: pointer">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ECE7DC" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"></path></svg>
+    </button>
+    <div style="display: flex; align-items: center; gap: 10px; background: #141412; border: 1px solid #2B2925; border-radius: 999px; padding: 4px 16px 4px 4px">
+      <div aria-hidden="true" style="width: 36px; height: 36px; border-radius: 999px; background: #2B2925; display: grid; place-items: center; font-weight: 700; font-size: 14px">P</div>
+      <div style="display: flex; flex-direction: column">
+        <span style="font-size: 14px; font-weight: 600">Agente Pedro</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9C968A">ID 0147 · LÍDER</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Saudação -->
+<section style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; padding: 8px 0 4px">
+  <div style="display: flex; flex-direction: column; gap: 8px">
+    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9C968A; letter-spacing: 0.08em">// TURNO 14.11.2026 · 12:41 · CANAL SEGURO</span>
+    <h1 style="margin: 0; font-size: clamp(30px, 4vw, 44px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05">Bem-vindo de volta, Agente Pedro.</h1>
+    <p style="margin: 0; color: #9C968A; font-size: 16px">A vigília continua. Você tem 3 prazos nas próximas 48 horas.</p>
+  </div>
+  <div style="font-family: 'Special Elite', monospace; font-size: 20px; color: {{accent}}; border: 2px solid {{accent}}; padding: 6px 14px; transform: rotate(-4deg); letter-spacing: 0.18em">CONFIDENCIAL</div>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+
+<!-- Coluna principal -->
+<main style="flex: 999 1 720px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+
+  <!-- Indicadores -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px">
+    <article style="background: #141412; border: 1px solid #2B2925; border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 18px">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <h2 style="margin: 0; font-size: 14px; font-weight: 500; color: #9C968A">Missões ativas</h2>
+        <button aria-label="Ver missões ativas" style="width: 44px; height: 44px; border-radius: 999px; background: transparent; border: 1px solid #2B2925; color: #ECE7DC; cursor: pointer; display: grid; place-items: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></button>
+      </div>
+      <div style="display: flex; align-items: flex-end; gap: 14px">
+        <span style="font-size: 44px; font-weight: 700; line-height: 1">18</span>
+        <div aria-hidden="true" style="flex: 1; height: 24px; background: repeating-linear-gradient(90deg, #6E6A61 0 2px, transparent 2px 5px); border-radius: 2px"></div>
+      </div>
+    </article>
+    <article style="background: #141412; border: 1px solid #2B2925; border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 18px">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <h2 style="margin: 0; font-size: 14px; font-weight: 500; color: #9C968A">Pendências críticas</h2>
+        <button aria-label="Ver pendências críticas" style="width: 44px; height: 44px; border-radius: 999px; background: transparent; border: 1px solid #2B2925; color: #ECE7DC; cursor: pointer; display: grid; place-items: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></button>
+      </div>
+      <div style="display: flex; align-items: flex-end; gap: 14px">
+        <span style="font-size: 44px; font-weight: 700; line-height: 1; color: {{accent}}">07</span>
+        <div aria-hidden="true" style="flex: 1; display: flex; align-items: flex-end; gap: 4px; height: 28px">
+          <sc-for list="{{pend}}" as="b" hint-placeholder-count="12"><div style="{{b.style}}"></div></sc-for>
+        </div>
+      </div>
+    </article>
+    <article style="background: #141412; border: 1px solid #2B2925; border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 18px">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <h2 style="margin: 0; font-size: 14px; font-weight: 500; color: #9C968A">Encerradas na semana</h2>
+        <button aria-label="Ver missões encerradas" style="width: 44px; height: 44px; border-radius: 999px; background: transparent; border: 1px solid #2B2925; color: #ECE7DC; cursor: pointer; display: grid; place-items: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></button>
+      </div>
+      <div style="display: flex; align-items: flex-end; gap: 14px">
+        <span style="font-size: 44px; font-weight: 700; line-height: 1">12</span>
+        <div aria-hidden="true" style="flex: 1; height: 14px; background: #2B2925; border-radius: 3px; position: relative; overflow: hidden">
+          <div style="width: 63%; height: 100%; background: #ECE7DC"></div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- Panorama + TCC -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px">
+    <article style="background: #141412; border: 1px solid #2B2925; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <h2 style="margin: 0; font-size: 17px; font-weight: 600">Registro semanal</h2>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9C968A">CONCLUÍDAS / PLANEJADAS POR DIA</span>
+        </div>
+        <label style="font-size: 13px; color: #9C968A; display: flex; align-items: center; gap: 6px">
+          <span class="sr">Período</span>
+          <select style="background: #1B1A17; color: #ECE7DC; border: 1px solid #2B2925; border-radius: 999px; padding: 10px 14px; font-family: inherit; font-size: 13px"><option>Esta semana</option><option>Este mês</option></select>
+        </label>
+      </div>
+      <div role="img" aria-label="Tarefas concluídas por dia nesta semana; sábado em destaque" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; align-items: end; height: 190px">
+        <sc-for list="{{days}}" as="d" hint-placeholder-count="7">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; height: 100%">
+            <div style="flex: 1; width: 100%; max-width: 46px; background: #1F1E1B; border-radius: 10px; display: flex; align-items: flex-end; overflow: hidden">
+              <div style="{{d.style}}"></div>
+            </div>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9C968A">{{d.label}}</span>
+          </div>
+        </sc-for>
+      </div>
+    </article>
+
+    <article style="background: #141412; border: 1px solid #2B2925; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: {{accent}}; letter-spacing: 0.08em">OP-0012 · PRIORIDADE MÁXIMA</span>
+          <h2 style="margin: 0; font-size: 17px; font-weight: 600">Operação TCC — Sokra</h2>
+        </div>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9C968A; border: 1px solid #2B2925; border-radius: 999px; padding: 6px 10px">DEFESA EM [DATA]</span>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap">
+        <span style="font-size: 40px; font-weight: 700; line-height: 1">62%</span>
+        <span style="font-size: 13px; color: #9C968A">do dossiê concluído</span>
+      </div>
+      <div aria-hidden="true" style="display: grid; grid-template-columns: repeat(40, minmax(0, 1fr)); gap: 3px; height: 26px">
+        <sc-for list="{{ticks}}" as="t" hint-placeholder-count="40"><div style="{{t.style}}"></div></sc-for>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: #9C968A">
+        <span style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 2px; background: #ECE7DC"></span>Concluído</span>
+        <span style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 2px; background: {{accent}}"></span>Em revisão</span>
+        <span style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 2px; background: #2B2925; border: 1px solid #45423B"></span>A fazer</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px">
+        <div style="background: #1B1A17; border: 1px solid #2B2925; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 10px">
+          <span style="font-size: 12px; color: #9C968A">Em andamento</span>
+          <span style="font-size: 14px; font-weight: 600">Cap. 3 — Metodologia</span>
+          <div style="display: flex; align-items: center; gap: 8px"><div aria-hidden="true" style="flex: 1; height: 4px; background: #2B2925; border-radius: 2px"><div style="width: 43%; height: 100%; background: {{accent}}; border-radius: 2px"></div></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px">43%</span></div>
+        </div>
+        <div style="background: #1B1A17; border: 1px solid #2B2925; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 10px">
+          <span style="font-size: 12px; color: #9C968A">Encerrado</span>
+          <span style="font-size: 14px; font-weight: 600">Revisão bibliográfica</span>
+          <div style="display: flex; align-items: center; gap: 8px"><div aria-hidden="true" style="flex: 1; height: 4px; background: #ECE7DC; border-radius: 2px"></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px">100%</span></div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- Agentes + Operações -->
+  <div style="display: flex; flex-wrap: wrap; gap: 16px">
+    <article style="flex: 3 1 420px; min-width: 0; background: #141412; border: 1px solid #2B2925; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <h2 style="margin: 0; font-size: 17px; font-weight: 600">Agentes em campo</h2>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9C968A">EQUIPE DE COMUNICAÇÃO · PROJETO DE EXTENSÃO</span>
+        </div>
+        <button style="height: 44px; padding: 0 16px; border-radius: 999px; background: transparent; border: 1px solid #2B2925; color: #ECE7DC; font-family: inherit; font-size: 13px; cursor: pointer">Cobrar pendentes</button>
+      </div>
+      <div style="overflow-x: auto">
+        <table style="width: 100%; min-width: 520px; border-collapse: collapse; font-size: 14px">
+          <thead>
+            <tr style="text-align: left; color: #9C968A; font-size: 12px">
+              <th style="font-weight: 500; padding: 8px 8px 10px 0; border-bottom: 1px solid #2B2925">Agente</th>
+              <th style="font-weight: 500; padding: 8px 8px 10px; border-bottom: 1px solid #2B2925">Entrega</th>
+              <th style="font-weight: 500; padding: 8px 8px 10px; border-bottom: 1px solid #2B2925">Prazo</th>
+              <th style="font-weight: 500; padding: 8px 0 10px 8px; border-bottom: 1px solid #2B2925">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{agents}}" as="a" hint-placeholder-count="4">
+              <tr>
+                <td style="padding: 12px 8px 12px 0; border-bottom: 1px solid #201F1C">
+                  <div style="display: flex; align-items: center; gap: 10px">
+                    <div aria-hidden="true" style="width: 32px; height: 32px; border-radius: 999px; background: #2B2925; display: grid; place-items: center; font-size: 12px; font-weight: 700">{{a.initial}}</div>
+                    <div style="display: flex; flex-direction: column"><span style="font-weight: 600">{{a.name}}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9C968A">{{a.role}}</span></div>
+                  </div>
+                </td>
+                <td style="padding: 12px 8px; border-bottom: 1px solid #201F1C">{{a.task}}</td>
+                <td style="padding: 12px 8px; border-bottom: 1px solid #201F1C; font-family: 'IBM Plex Mono', monospace; font-size: 12px">{{a.due}}</td>
+                <td style="padding: 12px 0 12px 8px; border-bottom: 1px solid #201F1C"><span style="{{a.pill}}">{{a.status}}</span></td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </article>
+
+    <article style="flex: 2 1 280px; min-width: 0; background: #141412; border: 1px solid #2B2925; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 600">Operações abertas</h2>
+      <sc-for list="{{ops}}" as="o" hint-placeholder-count="4">
+        <a href="#" style="{{o.style}}">
+          <span style="width: 30px; height: 30px; border-radius: 999px; border: 1px solid currentColor; display: grid; place-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px; flex: none">{{o.n}}</span>
+          <span style="display: flex; flex-direction: column; flex: 1; min-width: 0">
+            <span style="font-weight: 600; font-size: 14px">{{o.name}}</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; opacity: 0.85">{{o.meta}}</span>
+          </span>
+        </a>
+      </sc-for>
+    </article>
+  </div>
+</main>
+
+<!-- Coluna lateral -->
+<aside style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+  <article style="background: #141412; border: 1px solid #2B2925; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; justify-content: space-between; align-items: center">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 600">Próxima convocação</h2>
+      <button aria-label="Agendar reunião" style="width: 44px; height: 44px; border-radius: 999px; background: transparent; border: 1px solid #2B2925; color: #ECE7DC; cursor: pointer; display: grid; place-items: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+    </div>
+    <div style="position: relative; padding-top: 20px">
+      <div aria-hidden="true" style="position: absolute; top: 0; left: 24px; right: 24px; height: 40px; background: #1F1E1B; border: 1px solid #2B2925; border-radius: 16px"></div>
+      <div aria-hidden="true" style="position: absolute; top: 10px; left: 12px; right: 12px; height: 40px; background: #25231F; border: 1px solid #2B2925; border-radius: 16px"></div>
+      <div style="position: relative; background: #050505; border: 1px solid {{accent}}; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: {{accent}}; letter-spacing: 0.08em">● CONVOCAÇÃO · HOJE</span>
+        <span style="font-size: 22px; font-weight: 600; line-height: 1.15">Reunião de pauta — Equipe de Comunicação</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9C968A">19:00 – 20:00 · 5 agentes convocados</span>
+        <a href="#" style="height: 46px; border-radius: 999px; background: {{accent}}; color: #0B0B0A; font-weight: 600; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 8px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3h7v7M10 14L21 3M21 14v7H3V3h7"></path></svg>
+          Abrir dossiê da reunião
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <article style="background: #141412; border: 1px solid #2B2925; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 6px">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 600">Diretrizes de hoje</h2>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9C968A">1 / 5</span>
+    </div>
+    <label style="display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid #201F1C; min-height: 44px; box-sizing: border-box"><input type="checkbox" style="width: 18px; height: 18px; margin: 2px 0 0"><span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 14px">Lista de Grafos — entregar no AVA</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: {{accent}}">FACULDADE · ATÉ 23:59</span></span></label>
+    <label style="display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid #201F1C; min-height: 44px; box-sizing: border-box"><input type="checkbox" style="width: 18px; height: 18px; margin: 2px 0 0"><span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 14px">Escrever 2 páginas do capítulo 3</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9C968A">TCC</span></span></label>
+    <label style="display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid #201F1C; min-height: 44px; box-sizing: border-box"><input type="checkbox" style="width: 18px; height: 18px; margin: 2px 0 0"><span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 14px">Revisar arte do post de segunda</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9C968A">EQUIPE · ANTES DA REUNIÃO</span></span></label>
+    <label style="display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid #201F1C; min-height: 44px; box-sizing: border-box"><input type="checkbox" checked style="width: 18px; height: 18px; margin: 2px 0 0"><span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 14px; color: #9C968A; text-decoration: line-through">Confirmar pauta com a coordenação</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9C968A">EQUIPE</span></span></label>
+    <label style="display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; min-height: 44px; box-sizing: border-box"><input type="checkbox" style="width: 18px; height: 18px; margin: 2px 0 0"><span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 14px">Separar roupa da semana</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9C968A">PESSOAL</span></span></label>
+    <label style="display: flex; align-items: center; gap: 8px; margin-top: 8px; background: #1B1A17; border: 1px dashed #45423B; border-radius: 12px; padding: 0 12px; height: 44px">
+      <span aria-hidden="true" style="color: #9C968A; font-size: 18px">+</span>
+      <span class="sr">Nova diretriz</span>
+      <input type="text" placeholder="Registrar nova diretriz…" style="flex: 1; background: transparent; border: 0; outline: none; color: #ECE7DC; font-family: inherit; font-size: 14px">
+    </label>
+  </article>
+
+  <article style="background: #141412; border: 1px solid #2B2925; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; justify-content: space-between; align-items: center">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 600">Cofre</h2>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9C968A">MÓDULO OPCIONAL</span>
+    </div>
+    <p style="margin: 0; font-size: 14px; color: #9C968A; line-height: 1.5">Nenhum extrato importado neste mês. Envie um arquivo do seu banco para ver os gastos por categoria.</p>
+    <button style="height: 44px; border-radius: 999px; background: transparent; border: 1px solid #ECE7DC; color: #ECE7DC; font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer">Importar extrato (CSV ou OFX)</button>
+  </article>
+</aside>
+</div>
+
+<footer style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; border-top: 1px solid #2B2925; padding-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9C968A; letter-spacing: 0.06em">
+  <span>VIGÍLIA v0.1 · USO RESTRITO AO AGENTE 0147</span>
+  <span>TODAS AS AÇÕES SÃO REGISTRADAS</span>
+</footer>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#E5484D","options":["#E5484D","#7CF08A","#E2A336","#8AB4F8"]},"$preview":{"width":1440,"height":1240}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var accent = this.props.accent ?? '#E5484D';
+    var pendH = [30, 55, 40, 80, 35, 100, 60, 45, 90, 25, 70, 50];
+    var pend = pendH.map(function (h, i) {
+      return { style: 'flex:1;height:' + h + '%;border-radius:2px;background:' + (i === 5 || i === 8 ? accent : '#45423B') };
+    });
+    var raw = [['SEG', 5, 6], ['TER', 3, 6], ['QUA', 6, 7], ['QUI', 4, 7], ['SEX', 2, 5], ['SÁB', 3, 4], ['DOM', 0, 3]];
+    var days = raw.map(function (r) {
+      var today = r[0] === 'SÁB';
+      var pct = Math.round((r[1] / 7) * 100);
+      var bg = today ? 'repeating-linear-gradient(135deg,' + accent + ' 0 6px,#0B0B0A 6px 9px)' : '#4A4740';
+      return { label: r[0], style: 'width:100%;height:' + pct + '%;background:' + bg + ';border-radius:10px' };
+    });
+    var ticks = [];
+    for (var i = 0; i < 40; i++) {
+      var c = i < 25 ? '#ECE7DC' : (i < 30 ? accent : '#2B2925');
+      ticks.push({ style: 'background:' + c + ';border-radius:2px' });
+    }
+    var pill = function (kind) {
+      var base = 'font-family:IBM Plex Mono,monospace;font-size:11px;padding:5px 10px;border-radius:999px;white-space:nowrap;';
+      if (kind === 'late') return base + 'background:' + accent + ';color:#0B0B0A';
+      if (kind === 'doing') return base + 'background:#E2A336;color:#0B0B0A';
+      return base + 'border:1px solid #45423B;color:#ECE7DC';
+    };
+    var agents = [
+      { initial: 'A', name: 'Ana', role: 'DESIGN', task: 'Arte do post de segunda', due: '16/11', status: 'EM CAMPO', kind: 'doing' },
+      { initial: 'L', name: 'Lucas', role: 'REDAÇÃO', task: 'Legenda + roteiro do reels', due: '13/11', status: 'ATRASADO', kind: 'late' },
+      { initial: 'M', name: 'Marina', role: 'AUDIOVISUAL', task: 'Edição do vídeo do evento', due: '20/11', status: 'EM CAMPO', kind: 'doing' },
+      { initial: 'J', name: 'João', role: 'SOCIAL MEDIA', task: 'Relatório de métricas', due: '12/11', status: 'ENTREGUE', kind: 'done' }
+    ].map(function (a) { return Object.assign({}, a, { pill: pill(a.kind) }); });
+    var opBase = 'display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;min-height:44px;box-sizing:border-box;';
+    var ops = [
+      { n: '01', name: 'TCC — Sokra', meta: 'OP-0012 · 6 TAREFAS' },
+      { n: '02', name: 'Comunicação — Extensão', meta: 'OP-0031 · 9 TAREFAS' },
+      { n: '03', name: 'Faculdade — 7º período', meta: 'OP-0044 · 2 PROVAS' },
+      { n: '04', name: 'Vida pessoal', meta: 'OP-0050 · 4 TAREFAS' }
+    ].map(function (o, i) {
+      return Object.assign({}, o, { style: opBase + (i === 0 ? 'background:' + accent + ';color:#0B0B0A' : 'background:#1B1A17;border:1px solid #2B2925;color:#ECE7DC') });
+    });
+    return { accent: accent, pend: pend, days: days, ticks: ticks, agents: agents, ops: ops };
+  }
+}
+</script>
+</body>
+</html>

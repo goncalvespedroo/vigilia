@@ -1,0 +1,18 @@
+.aviso {
+  position: fixed;
+  inset: auto 16px 16px auto;
+  max-width: calc(100vw - 32px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--e-3);
+  padding: var(--e-3) var(--e-3) var(--e-3) var(--e-4);
+  background: var(--c-painel-2);
+  border: 1px solid var(--c-borda);
+  border-radius: var(--r-card);
+  font-size: 14px;
+  z-index: 100;
+}
+@media (max-width: 720px) {
+  .aviso { inset: auto 12px calc(96px + env(safe-area-inset-bottom)) 12px; }
+}
