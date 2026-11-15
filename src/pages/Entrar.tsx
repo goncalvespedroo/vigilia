@@ -30,7 +30,7 @@ export function Entrar() {
           <span className="carimbo">ACESSO RESTRITO</span>
         </div>
         <div className={s.cabeca}>
-          <span className="mono">// CANAL SEGURO · IDENTIFICAÇÃO</span>
+          <span className="mono">CANAL SEGURO · IDENTIFICAÇÃO</span>
           <h1 className={s.titulo}>Identifique-se, agente.</h1>
         </div>
 

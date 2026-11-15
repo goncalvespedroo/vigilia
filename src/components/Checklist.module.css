@@ -6,21 +6,38 @@
 summary.cabeca { cursor: pointer; list-style: none; margin-bottom: 0; }
 summary.cabeca::-webkit-details-marker { display: none; }
 details[open] > summary.cabeca { margin-bottom: var(--e-2); }
-.cabeca h2 { margin: 0; font-size: 17px; font-weight: 600; }
+.cabeca h2 { margin: 0; font-size: 16px; }
 .linha {
   display: flex; gap: var(--e-3); align-items: flex-start;
   padding: var(--e-3) 0;
   border-bottom: 1px solid var(--divider);
   min-height: var(--toque);
+  transition: background var(--t-rapida);
+}
+.linha[data-recem] { animation: arquivar 1.2s ease-out; }
+@keyframes arquivar {
+  0% { background: rgb(166 213 229 / 0.16); box-shadow: inset 3px 0 0 var(--accent); }
 }
 .linha:last-child { border-bottom: 0; }
-.check { width: 20px; height: 20px; margin: 2px 0 0; flex: none; cursor: pointer; }
+.check {
+  appearance: none; -webkit-appearance: none;
+  width: 20px; height: 20px; margin: 1px 0 0; flex: none; cursor: pointer;
+  border: 1px solid var(--border-strong); border-radius: var(--r-selo); background: var(--bg);
+  display: grid; place-items: center;
+  transition: border-color var(--t-rapida), background var(--t-rapida), box-shadow var(--t-rapida);
+}
+.check:hover { border-color: var(--success); box-shadow: var(--brilho-forte); }
+.check:checked { background: var(--accent); border-color: var(--accent); }
+.check:checked::after {
+  content: ''; width: 5px; height: 10px; margin-top: -2px;
+  border: solid var(--on-accent); border-width: 0 2px 2px 0; transform: rotate(45deg);
+}
 .corpo { display: flex; flex-direction: column; gap: 6px; min-width: 0; flex: 1; }
 .titulo {
   background: none; border: 0; padding: 0; text-align: left; cursor: pointer;
   font-size: 15px; line-height: 1.35; overflow-wrap: anywhere;
 }
-.titulo:hover { text-decoration: underline; text-decoration-color: var(--border-strong); }
+.titulo:hover { color: var(--accent); }
 .linha[data-status='feito'] .titulo { color: var(--text-2); text-decoration: line-through; }
 .meta { display: flex; flex-wrap: wrap; gap: 6px; }
 .meta:empty { display: none; }

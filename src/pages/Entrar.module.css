@@ -1,18 +1,24 @@
 .tela { min-height: 100dvh; display: grid; place-items: center; padding: var(--e-4); }
-.cartao { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: var(--e-4); padding: 28px; }
+.cartao {
+  width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: var(--e-4); padding: 28px;
+  border-color: var(--border-strong); box-shadow: var(--sombra-modal);
+}
 .topo { display: flex; align-items: center; justify-content: space-between; }
 .cabeca { display: flex; flex-direction: column; gap: var(--e-2); }
-.titulo { margin: 0; font-size: 28px; letter-spacing: 0.02em; line-height: 1.1; }
+.titulo { margin: 0; font-size: 26px; line-height: 1.15; }
+.cabeca > :global(.mono) { color: var(--accent); }
 .campo { display: flex; flex-direction: column; gap: 6px; }
 .campo input {
   height: var(--toque);
   padding: 0 var(--e-4);
-  background: var(--surface-2);
+  background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--r-1);
   font-size: 16px; /* evita zoom automático no iOS */
+  transition: border-color var(--t-rapida), box-shadow var(--t-rapida);
 }
-.campo input:focus { border-color: var(--text-2); outline: none; }
+.campo input:focus { border-color: var(--success); box-shadow: var(--anel-foco); outline: none; }
+.campo > :global(.mono) { color: var(--text-2); }
 .erro {
   margin: 0; padding: var(--e-3) var(--e-4);
   border: 1px solid var(--danger); border-radius: var(--r-2);

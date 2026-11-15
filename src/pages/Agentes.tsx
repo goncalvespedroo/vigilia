@@ -38,7 +38,7 @@ export function Agentes() {
     <>
       <section className={s.cabeca}>
         <div className={s.cabecaTexto}>
-          <span className="mono">// EQUIPE · {ativos.length} {ativos.length === 1 ? 'AGENTE ATIVO' : 'AGENTES ATIVOS'}{totalAtrasadas ? ` · ${totalAtrasadas} EM ATRASO` : ''}</span>
+          <span className="mono">EQUIPE · {ativos.length} {ativos.length === 1 ? 'AGENTE ATIVO' : 'AGENTES ATIVOS'}{totalAtrasadas ? ` · ${totalAtrasadas} EM ATRASO` : ''}</span>
           <h1 className={s.titulo}>Agentes</h1>
         </div>
         <div className={s.acoes}>
@@ -57,7 +57,7 @@ export function Agentes() {
 
       {!carregando && membros.length === 0 && (
         <section className={`card ${s.vazio}`}>
-          <span className="mono">// NENHUM AGENTE EM CAMPO</span>
+          <span className="mono">NENHUM AGENTE EM CAMPO</span>
           <p>Cadastre as pessoas da equipe para atribuir entregas e acompanhar quem está com o quê. No registro rápido, use <code className="mono">+nome</code> para definir o responsável.</p>
           <button className="btn btn--destaque" onClick={() => setEditandoMembro('novo')}>Recrutar o primeiro agente</button>
         </section>

@@ -1,0 +1,118 @@
+.cabeca { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--e-3); }
+.cabecaTexto { display: flex; flex-direction: column; gap: var(--e-2); }
+.titulo { margin: 0; font-size: clamp(28px, 4vw, 40px); line-height: 1.05; }
+
+.controles { display: flex; align-items: center; gap: var(--e-2); }
+.navMes {
+  width: var(--toque); height: var(--toque);
+  display: grid; place-items: center;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-2);
+  cursor: pointer; transition: border-color var(--t-rapida), box-shadow var(--t-rapida), color var(--t-rapida);
+}
+.navMes:hover { border-color: var(--success); color: var(--accent); box-shadow: var(--brilho-forte); }
+.mes {
+  min-width: 170px; text-align: center;
+  font-family: var(--f-titulo); font-size: 18px; font-weight: 600; text-transform: capitalize;
+}
+.mes span { font-family: var(--f-mono); font-size: 13px; font-weight: 400; color: var(--text-2); }
+
+.grade { display: flex; flex-wrap: wrap; gap: var(--e-4); align-items: flex-start; }
+.mesCard { flex: 999 1 640px; min-width: 0; padding: var(--e-4); display: flex; flex-direction: column; gap: var(--e-2); }
+.painelDia { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: var(--e-4); position: sticky; top: 20px; }
+
+/* ------------------------------------------------------------ Grade do mês */
+.semana { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.semana span { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.12em; color: var(--text-2); padding: 0 8px 4px; }
+.dias { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+
+.dia {
+  min-height: 112px;
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 4px;
+  background: var(--surface-alta);
+  border: 1px solid var(--border);
+  border-radius: var(--r-2);
+  min-width: 0;
+  transition: border-color var(--t-rapida), box-shadow var(--t-rapida), background var(--t-rapida);
+}
+.dia:hover { border-color: var(--border-strong); }
+.dia[data-fora] { background: transparent; border-style: dashed; opacity: 0.55; }
+.dia[data-hoje] { border-color: var(--success); }
+.dia[data-selecionado] { border-color: var(--accent); box-shadow: var(--brilho-forte); background: var(--surface-2); }
+.dia[data-soltando] { border-color: var(--accent); border-style: dashed; background: rgb(166 213 229 / 0.08); }
+
+.diaBotao {
+  display: flex; align-items: center; justify-content: space-between; gap: 4px;
+  width: 100%; min-height: 28px; padding: 0 4px;
+  background: none; border: 0; border-radius: var(--r-1); cursor: pointer;
+}
+.num { font-family: var(--f-mono); font-size: 13px; color: var(--text-2); }
+.dia[data-hoje] .num {
+  color: var(--on-accent); background: var(--accent);
+  padding: 1px 5px; border-radius: var(--r-selo);
+  box-shadow: 0 0 10px rgb(166 213 229 / 0.5);
+}
+.dia[data-selecionado]:not([data-hoje]) .num { color: var(--accent); }
+.pontos { display: none; gap: 3px; align-items: center; }
+.pontos i { width: 5px; height: 5px; border-radius: var(--r-circulo); }
+.pontos b { width: 5px; height: 5px; border-radius: 1px; background: var(--danger-text); }
+
+.itens { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.chip {
+  display: flex; align-items: center; gap: 5px;
+  width: 100%; min-width: 0; min-height: 22px; padding: 2px 6px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-selo);
+  font-size: 12px; text-align: left; cursor: pointer;
+  transition: border-color var(--t-rapida), color var(--t-rapida);
+}
+.chip:hover { border-color: var(--success); color: var(--accent); }
+.chip[draggable='true'] { cursor: grab; }
+.chip[data-reuniao] { border-color: var(--success); background: rgb(57 122 152 / 0.18); }
+.chip[data-atrasada] { border-color: var(--danger); background: rgb(121 47 59 / 0.35); }
+.chip[data-feito] .chipTexto { text-decoration: line-through; color: var(--text-2); }
+.chipHora { font-family: var(--f-mono); font-size: 10px; color: var(--accent); flex: none; }
+.chipTexto { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.mais {
+  background: none; border: 0; padding: 2px 6px; cursor: pointer; text-align: left;
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.06em; color: var(--text-2);
+}
+.mais:hover { color: var(--accent); }
+.dica { margin: var(--e-2) 0 0; font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--text-off); }
+
+/* ------------------------------------------------------------ Painel do dia */
+.diaTopo { display: flex; flex-direction: column; gap: 4px; padding-bottom: var(--e-3); border-bottom: 1px solid var(--border); }
+.diaMeta { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.08em; color: var(--accent); }
+.diaTitulo { margin: 0; font-size: 19px; line-height: 1.2; }
+.diaTitulo::first-letter { text-transform: uppercase; }
+.bloco { display: flex; flex-direction: column; gap: var(--e-2); }
+.blocoRotulo { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em; color: var(--text-2); }
+.reuniao {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px;
+  padding: var(--e-3); min-height: var(--toque);
+  background: linear-gradient(160deg, var(--surface-2), #0e1822 80%);
+  border: 1px solid var(--success); border-radius: var(--r-2);
+  transition: box-shadow var(--t-rapida);
+}
+.reuniao:hover { box-shadow: var(--brilho-forte); }
+.reuniao[data-feito] { opacity: 0.6; }
+.reuniaoHora { font-family: var(--f-mono); font-size: 12px; color: var(--accent); }
+.reuniaoTitulo { font-weight: 600; font-size: 14px; flex: 1; min-width: 0; }
+
+/* ------------------------------------------------------------ Telas menores */
+@media (max-width: 900px) {
+  .dia { min-height: 64px; }
+  .itens { display: none; }
+  .pontos { display: inline-flex; }
+  .diaBotao { flex-direction: column; justify-content: center; gap: 6px; min-height: 56px; }
+  .dica { display: none; }
+  .painelDia { position: static; }
+}
+@media (max-width: 720px) {
+  .mesCard { padding: var(--e-2); }
+  .semana, .dias { gap: 3px; }
+  .semana span { padding: 0; text-align: center; }
+  .dia { min-height: 52px; padding: 2px; }
+  .diaBotao { min-height: 46px; padding: 0; }
+  .mes { min-width: 0; font-size: 16px; }
+  .controles { width: 100%; justify-content: space-between; }
+}

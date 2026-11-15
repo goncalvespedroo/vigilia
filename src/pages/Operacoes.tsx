@@ -7,6 +7,7 @@ import { Checklist } from '../components/Checklist'
 import { EditorTarefa } from '../components/EditorTarefa'
 import { EditorArea } from '../components/EditorArea'
 import s from './Operacoes.module.css'
+import { Carregando } from '../components/Carregando'
 
 type Visao = 'kanban' | 'checklist'
 const CHAVE_VISAO = 'vigilia.visao'
@@ -59,7 +60,7 @@ export function Operacoes() {
       <section className={s.cabeca}>
         <div className={s.cabecaTexto}>
           <span className="mono">
-            {areaFiltrada ? `// OPERAÇÃO ${areaFiltrada.codigo ?? ''}${areaFiltrada.arquivada ? ' · ARQUIVADA' : ''}` : '// QUADRO DE OPERAÇÕES'}
+            {areaFiltrada ? `OPERAÇÃO ${areaFiltrada.codigo ?? ''}${areaFiltrada.arquivada ? ' · ARQUIVADA' : ''}` : 'QUADRO DE OPERAÇÕES'}
           </span>
           <div className={s.tituloLinha}>
             {areaFiltrada && <span className="ponto-area" style={{ background: areaFiltrada.cor ?? 'var(--text-2)', width: 14, height: 14 }} />}
@@ -112,7 +113,7 @@ export function Operacoes() {
 
       {erro && <p className={s.erro}>Falha ao consultar a central: {erro}</p>}
       {carregando ? (
-        <span className="mono">// CARREGANDO DOSSIÊS…</span>
+        <Carregando />
       ) : visao === 'kanban' ? (
         <Kanban tarefas={visiveis} onAbrir={setEditando} />
       ) : (

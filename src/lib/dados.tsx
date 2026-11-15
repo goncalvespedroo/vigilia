@@ -3,6 +3,7 @@ import type { PostgrestError, RealtimePostgresChangesPayload, SupabaseClient } f
 import { supabase } from './supabase'
 import { useAuth } from './auth'
 import { lerCache, salvarCache } from './cache'
+import { marcarConcluida } from './conclusao'
 import type {
   Area, AreaInsert, ItemPauta, Membro, MembroInsert, Participante, Reuniao, Subtarefa, Tarefa, TarefaInsert,
 } from '../types/database'
@@ -415,6 +416,7 @@ export function DadosProvider({ children }: { children: ReactNode }) {
       const local: Partial<Tarefa> = { ...alt }
       if (anterior && alt.status && alt.status !== anterior.status) {
         local.concluida_em = alt.status === 'feito' ? new Date().toISOString() : null
+        if (alt.status === 'feito') marcarConcluida(id)
       }
       ou('Alteração não salva')(await alterar('tarefas', id, alt, local))
     },

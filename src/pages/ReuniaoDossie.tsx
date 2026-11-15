@@ -34,7 +34,7 @@ export function ReuniaoDossie() {
   if (!r) {
     return (
       <section className="card" style={{ display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'flex-start' }}>
-        <span className="mono">{carregando ? '// CARREGANDO DOSSIÊ…' : '// DOSSIÊ NÃO ENCONTRADO'}</span>
+        <span className="mono">{carregando ? 'CARREGANDO DOSSIÊ…' : 'DOSSIÊ NÃO ENCONTRADO'}</span>
         {!carregando && <Link to="/reunioes" className="btn">Voltar às reuniões</Link>}
       </section>
     )

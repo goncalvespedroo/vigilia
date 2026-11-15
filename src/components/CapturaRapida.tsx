@@ -10,6 +10,8 @@ interface Props {
   areaPadrao?: string | null
   /** Sem @prazo explícito, a tarefa vence hoje (tela Hoje). */
   paraHoje?: boolean
+  /** Sem @prazo explícito, a tarefa vence neste dia (Calendário). */
+  diaPadrao?: Date
   /** Versão menor, sem dicas — para caber em cards. */
   compacta?: boolean
   /** Encaminhamento de reunião: a tarefa nasce ligada a ela. */
@@ -21,7 +23,7 @@ interface Props {
   aoRegistrar?: (titulo: string) => void
 }
 
-export function CapturaRapida({ areaPadrao, paraHoje, compacta, reuniaoId, placeholder, autoFoco, aoRegistrar }: Props) {
+export function CapturaRapida({ areaPadrao, paraHoje, diaPadrao, compacta, reuniaoId, placeholder, autoFoco, aoRegistrar }: Props) {
   const { areas, membros, criarTarefa, semRede } = useDados()
   const [texto, setTexto] = useState('')
   const campo = useRef<HTMLInputElement>(null)
@@ -29,9 +31,10 @@ export function CapturaRapida({ areaPadrao, paraHoje, compacta, reuniaoId, place
   const agentes = useMemo(() => membros.filter((m) => m.ativo), [membros])
   const cap = useMemo(() => {
     const r = interpretar(texto, ativas, new Date(), agentes)
-    if (paraHoje && !r.prazo && r.titulo) r.prazo = montarPrazo(inicioDoDia(new Date()))
+    const dia = diaPadrao ?? (paraHoje ? new Date() : null)
+    if (dia && !r.prazo && r.titulo) r.prazo = montarPrazo(inicioDoDia(dia))
     return r
-  }, [texto, ativas, agentes, paraHoje])
+  }, [texto, ativas, agentes, paraHoje, diaPadrao])
 
   useEffect(() => {
     if (autoFoco) return // dentro de janela: o atalho N é da página

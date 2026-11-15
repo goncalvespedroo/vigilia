@@ -9,6 +9,7 @@ import { Operacoes } from './pages/Operacoes'
 import { Agentes } from './pages/Agentes'
 import { Reunioes } from './pages/Reunioes'
 import { ReuniaoDossie } from './pages/ReuniaoDossie'
+import { Calendario } from './pages/Calendario'
 import { DadosProvider } from './lib/dados'
 import { AtualizacaoPWA } from './components/AtualizacaoPWA'
 
@@ -29,6 +30,7 @@ export function App() {
               <Route index element={<Painel />} />
               <Route path="hoje" element={<Hoje />} />
               <Route path="operacoes" element={<Operacoes />} />
+              <Route path="calendario" element={<Calendario />} />
               <Route path="reunioes" element={<Reunioes />} />
               <Route path="reunioes/:id" element={<ReuniaoDossie />} />
               <Route path="agentes" element={<Agentes />} />

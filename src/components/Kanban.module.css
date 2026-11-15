@@ -5,45 +5,59 @@
   align-items: start;
 }
 .coluna {
-  background: var(--surface);
+  background: rgb(14 24 34 / 0.85);
   border: 1px solid var(--border);
   border-radius: var(--r-3);
   padding: var(--e-3);
   display: flex;
   flex-direction: column;
-  gap: var(--e-3);
+  gap: 10px;
   min-height: 200px;
-  transition: border-color 0.15s;
+  transition: border-color var(--t-rapida), box-shadow var(--t-rapida);
+  animation: subir var(--t-entrada) both;
 }
-.colunaAlvo { border-color: var(--text-2); }
+.colunaAlvo { border-color: var(--success); box-shadow: var(--brilho-forte); }
 .cabeca {
   display: flex; justify-content: space-between; align-items: center;
   padding: var(--e-1) var(--e-2) 0;
 }
-.cabeca h2 { margin: 0; font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
-.cabeca h2::before { content: ''; width: 8px; height: 8px; border-radius: 2px; background: var(--text); }
+.cabeca h2 {
+  margin: 0; display: flex; align-items: center; gap: 8px;
+  font-family: var(--f-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.cabeca h2::before { content: ''; width: 6px; height: 6px; border-radius: 1px; background: var(--text); }
+.cabeca[data-status='fazendo'] h2 { color: var(--warning); }
 .cabeca[data-status='fazendo'] h2::before { background: var(--warning); }
-.cabeca[data-status='feito'] h2::before { background: var(--border-strong); }
+.cabeca[data-status='feito'] h2 { color: var(--accent); }
+.cabeca[data-status='feito'] h2::before { background: var(--success); }
 
 .lista { display: flex; flex-direction: column; gap: var(--e-2); }
 .cartao {
-  background: var(--surface-2);
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r-2);
   padding: var(--e-3);
   display: flex;
   flex-direction: column;
-  gap: var(--e-2);
+  gap: 10px;
   cursor: grab;
+  transition: border-color var(--t-rapida), box-shadow var(--t-rapida), opacity var(--t-rapida);
 }
-.cartao[data-status='fazendo'] { border-left: 3px solid var(--warning); }
+.cartao:hover { border-color: var(--border-strong); box-shadow: var(--brilho); }
+.cartao[data-status='fazendo'] { border-color: var(--success); box-shadow: var(--brilho-forte); }
 .cartao[data-status='feito'] { opacity: 0.6; }
+.cartao[data-recem] { animation: arquivar 1.2s ease-out; }
+@keyframes arquivar {
+  0% { opacity: 1; border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 0 28px -4px rgb(166 213 229 / 0.8); }
+  60% { opacity: 1; border-color: var(--success); }
+}
+.codigo { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.04em; color: var(--text-2); }
 .cartao[data-status='feito'] .titulo { text-decoration: line-through; }
 .arrastando { opacity: 0.35; }
 .cartaoTopo { display: flex; justify-content: space-between; align-items: center; }
 .titulo {
   background: none; border: 0; padding: 0; text-align: left; cursor: pointer;
-  font-size: 15px; font-weight: 500; line-height: 1.35; overflow-wrap: anywhere;
+  font-size: 14px; font-weight: 600; line-height: 1.35; overflow-wrap: anywhere;
 }
 .titulo:hover { color: var(--accent); text-decoration: underline; text-decoration-color: var(--border-strong); }
 .meta { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -57,9 +71,10 @@
 }
 /* amplia a área de toque para 44px sem aumentar o visual */
 .avancar::after { content: ''; position: absolute; inset: -6px; }
-.avancar[data-para='fazendo']:hover { border-color: var(--warning); color: var(--warning); }
-.avancar[data-para='feito']:hover { border-color: var(--text); }
-.marcador { height: 3px; border-radius: 2px; background: var(--accent); margin: 2px 0; }
+.avancar { color: var(--text-2); transition: border-color var(--t-rapida), color var(--t-rapida), box-shadow var(--t-rapida); }
+.avancar:hover { border-color: var(--success); color: var(--accent); box-shadow: var(--brilho-forte); }
+.avancar[data-para='fazendo']:hover { border-color: var(--warning); color: var(--warning); box-shadow: none; }
+.marcador { height: 3px; border-radius: 2px; background: var(--accent); box-shadow: 0 0 10px var(--accent); margin: 2px 0; }
 .vazio { margin: 0; padding: var(--e-3) var(--e-2); color: var(--text-2); font-size: 13px; text-align: center; }
 
 /* Celular: colunas lado a lado com rolagem horizontal */

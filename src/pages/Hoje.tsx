@@ -10,6 +10,7 @@ import { CapturaRapida } from '../components/CapturaRapida'
 import { LinhaTarefa } from '../components/Checklist'
 import { EditorTarefa } from '../components/EditorTarefa'
 import s from './Hoje.module.css'
+import { Carregando } from '../components/Carregando'
 
 const SEMANA = ['DOMINGO', 'SEGUNDA', 'TERÇA', 'QUARTA', 'QUINTA', 'SEXTA', 'SÁBADO']
 
@@ -38,7 +39,7 @@ export function Hoje() {
   return (
     <>
       <section className={s.cabeca}>
-        <span className="mono">// DIRETRIZES DE HOJE · {data}</span>
+        <span className="mono">DIRETRIZES DE HOJE · {data}</span>
         <h1 className={s.titulo}>Hoje</h1>
       </section>
 
@@ -53,7 +54,7 @@ export function Hoje() {
 
       {erro && <p className={s.erro}>Falha ao consultar a central: {erro}</p>}
       {carregando ? (
-        <span className="mono">// CARREGANDO DOSSIÊS…</span>
+        <Carregando />
       ) : (
         <div className={s.secoes}>
           {reunioesHoje.length > 0 && (

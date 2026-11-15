@@ -25,7 +25,7 @@
 .lateral { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: var(--e-4); }
 .bloco { display: flex; flex-direction: column; gap: var(--e-3); }
 .blocoTopo { display: flex; justify-content: space-between; align-items: center; gap: var(--e-3); }
-.blocoTopo h2 { margin: 0; font-size: 17px; font-weight: 600; }
+.blocoTopo h2 { margin: 0; font-size: 16px; }
 .vazio { margin: 0; color: var(--text-2); font-size: 14px; line-height: 1.5; }
 .link { text-decoration: underline; text-decoration-color: var(--border-strong); }
 

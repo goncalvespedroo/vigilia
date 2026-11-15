@@ -25,27 +25,40 @@
 .registradas li { display: flex; align-items: center; gap: 8px; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--accent); }
 .registradas b { font-family: var(--f-ui); font-weight: 500; font-size: 13px; letter-spacing: 0; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .form { display: flex; flex-direction: column; gap: var(--e-4); padding: var(--e-5); }
-.topo { display: flex; justify-content: space-between; align-items: center; }
-.fechar {
-  width: var(--toque); height: var(--toque);
-  border-radius: var(--r-1); border: 1px solid var(--border);
-  background: transparent; font-size: 22px; cursor: pointer;
+.topo { display: flex; justify-content: space-between; align-items: center; gap: var(--e-3); }
+/* Primeira faixa da janela vira cabeçalho de registro (sistema de design · 04) */
+.form > .topo:first-child {
+  margin: calc(-1 * var(--e-5)) calc(-1 * var(--e-5)) 0;
+  padding: 10px var(--e-4) 10px var(--e-5);
+  background: var(--surface-alta);
+  border-bottom: 1px solid var(--border);
 }
+.form > .topo:first-child :global(.mono) { color: var(--accent); letter-spacing: 0.1em; }
+.fechar {
+  width: 36px; height: 36px; flex: none; position: relative;
+  border-radius: var(--r-1); border: 1px solid var(--border);
+  background: transparent; font-size: 20px; line-height: 1; cursor: pointer; color: var(--text);
+  transition: border-color var(--t-rapida), color var(--t-rapida);
+}
+.fechar::after { content: ''; position: absolute; inset: -4px; }
+.fechar:hover { border-color: var(--border-strong); color: var(--accent); }
 .campo { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .campo select, .campo input, .campo textarea {
   min-height: var(--toque);
   padding: 0 var(--e-3);
-  background: var(--surface-2);
+  background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: var(--r-2);
-  font-size: 15px;
+  border-radius: var(--r-1);
+  font-size: 14px;
   min-width: 0;
+  transition: border-color var(--t-rapida), box-shadow var(--t-rapida);
 }
 .campo textarea { padding: var(--e-3); resize: vertical; line-height: 1.4; }
-.campo :is(select, input, textarea):focus { outline: none; border-color: var(--text-2); }
+.campo :is(select, input, textarea):focus { outline: none; border-color: var(--success); box-shadow: var(--anel-foco); }
+.campo > span:first-child:not(:global(.sr)) { font-size: 13px; color: var(--text-2); }
 .campo input::-webkit-calendar-picker-indicator { filter: invert(0.8); }
 .titulo.titulo { font-size: 20px; font-weight: 600; background: transparent; border-color: transparent; padding: 4px 0; resize: none; }
-.titulo.titulo:focus { border-color: transparent; border-bottom-color: var(--border-strong); }
+.titulo.titulo:focus { border-color: transparent; border-bottom-color: var(--border-strong); box-shadow: none; }
 
 .status {
   display: flex; gap: 4px; margin: 0; padding: 4px;

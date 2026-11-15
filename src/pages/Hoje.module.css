@@ -2,13 +2,13 @@
 .titulo { margin: 0; font-size: clamp(28px, 4vw, 40px); letter-spacing: 0.02em; line-height: 1.05; }
 .indicadores { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--e-3); }
 .indicador { display: flex; flex-direction: column; gap: var(--e-3); padding: var(--e-4); }
-.indicador h2 { margin: 0; font-size: 13px; font-weight: 500; color: var(--text-2); }
-.numero { font-size: 36px; font-weight: 700; line-height: 1; }
+.indicador h2 { margin: 0; font-family: var(--f-ui); font-size: 13px; font-weight: 500; letter-spacing: 0; color: var(--text-2); }
+.numero { font-family: var(--f-mono); font-size: 36px; font-weight: 500; line-height: 1; }
 .numero small { font-size: 16px; color: var(--text-2); font-weight: 500; }
 .secoes { display: flex; flex-direction: column; gap: var(--e-4); max-width: 860px; }
 .secao { padding-top: var(--e-4); }
 .secaoCabeca { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--e-1); }
-.secaoCabeca h2 { margin: 0; font-size: 17px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.secaoCabeca h2 { margin: 0; font-size: 16px; display: flex; align-items: center; gap: 8px; }
 .secaoCabeca h2::before { content: ''; width: 8px; height: 8px; border-radius: 2px; background: var(--text); }
 .secao[data-marca='atrasada'] { border-color: color-mix(in srgb, var(--danger) 80%, var(--border)); }
 .secao[data-marca='atrasada'] h2::before { background: var(--danger-text); }
@@ -25,5 +25,5 @@
 }
 .reuniao:last-child { border-bottom: 0; }
 .reuniao:hover .reuniaoTitulo { text-decoration: underline; text-decoration-color: var(--border-strong); }
-.reuniaoHora { font-family: var(--f-mono); font-size: 13px; color: var(--accent); flex: none; }
+.reuniaoHora { font-family: var(--f-mono); font-size: 12px; color: var(--accent); flex: none; }
 .reuniaoTitulo { flex: 1; min-width: 160px; font-size: 15px; }

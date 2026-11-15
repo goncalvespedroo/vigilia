@@ -78,7 +78,7 @@ export function Notificacoes({ onFechar }: { onFechar: () => void }) {
     >
       <div className={d.form}>
         <div className={d.topo}>
-          <span className="mono" id="notif-titulo">// CANAL DE ALERTAS</span>
+          <span className="mono" id="notif-titulo">CANAL DE ALERTAS</span>
           <button type="button" className={d.fechar} aria-label="Fechar" onClick={fechar}>×</button>
         </div>
 

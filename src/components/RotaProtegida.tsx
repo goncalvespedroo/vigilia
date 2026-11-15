@@ -8,7 +8,7 @@ export function RotaProtegida() {
   if (carregando) {
     return (
       <div style={{ minHeight: '100dvh', display: 'grid', placeItems: 'center' }}>
-        <span className="mono">// VERIFICANDO CREDENCIAIS…</span>
+        <span className="mono">VERIFICANDO CREDENCIAIS…</span>
       </div>
     )
   }

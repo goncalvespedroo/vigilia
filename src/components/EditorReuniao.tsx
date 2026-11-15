@@ -91,7 +91,7 @@ export function EditorReuniao({ reuniao: r, onFechar, onCriada, onExcluida }: Pr
     <dialog ref={dialogo} className={d.dialogo} tabIndex={-1} onClose={onFechar} onClick={(e) => e.target === dialogo.current && fechar()} aria-labelledby="reuniao-titulo">
       <form className={d.form} onSubmit={salvar} noValidate>
         <div className={d.topo}>
-          <span className="mono" id="reuniao-titulo">{nova ? '// NOVA CONVOCAÇÃO' : '// EDITAR CONVOCAÇÃO'}</span>
+          <span className="mono" id="reuniao-titulo">{nova ? 'NOVA CONVOCAÇÃO' : 'EDITAR CONVOCAÇÃO'}</span>
           <button type="button" className={d.fechar} aria-label="Fechar" onClick={fechar}>×</button>
         </div>
 

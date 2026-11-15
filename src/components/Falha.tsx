@@ -21,7 +21,7 @@ export function TelaFalha({ erro }: { erro: unknown }) {
   return (
     <div style={{ minHeight: '100dvh', display: 'grid', placeItems: 'center', padding: 16 }}>
       <div className="card" style={{ maxWidth: 640, width: '100%', display: 'flex', flexDirection: 'column', gap: 14, borderColor: 'var(--danger)' }}>
-        <span className="mono" style={{ color: 'var(--danger-text)' }}>// FALHA NO SISTEMA</span>
+        <span className="mono" style={{ color: 'var(--danger-text)' }}>FALHA NO SISTEMA</span>
         <h1 style={{ margin: 0, fontSize: 24 }}>Algo quebrou ao montar a tela.</h1>
         <p style={{ margin: 0, color: 'var(--text-2)', lineHeight: 1.5 }}>
           Copie o texto abaixo e envie para análise. Se o problema persistir, use “Limpar dados locais” — seus dados no

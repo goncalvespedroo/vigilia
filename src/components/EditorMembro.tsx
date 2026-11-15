@@ -68,7 +68,7 @@ export function EditorMembro({ membro, onFechar }: Props) {
     <dialog ref={dialogo} className={d.dialogo} tabIndex={-1} onClose={onFechar} onClick={(e) => e.target === dialogo.current && fechar()} aria-labelledby="membro-titulo">
       <form className={d.form} onSubmit={salvar} noValidate>
         <div className={d.topo}>
-          <span className="mono" id="membro-titulo">{novo ? '// RECRUTAR AGENTE' : '// FICHA DO AGENTE'}</span>
+          <span className="mono" id="membro-titulo">{novo ? 'RECRUTAR AGENTE' : 'FICHA DO AGENTE'}</span>
           <button type="button" className={d.fechar} aria-label="Fechar" onClick={fechar}>×</button>
         </div>
 

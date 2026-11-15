@@ -90,7 +90,7 @@ export function EditorArea({ area, onFechar, onCriada }: Props) {
       <form className={d.form} onSubmit={salvar} noValidate>
         <div className={d.topo}>
           <span className="mono" id="area-titulo">
-            {nova ? '// NOVA OPERAÇÃO' : `// OPERAÇÃO ${area.codigo ?? ''}`}
+            {nova ? 'NOVA OPERAÇÃO' : `OPERAÇÃO ${area.codigo ?? ''}`}
           </span>
           <button type="button" className={d.fechar} aria-label="Fechar" onClick={fechar}>×</button>
         </div>

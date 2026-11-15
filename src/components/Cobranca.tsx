@@ -37,7 +37,7 @@ export function Cobranca({ titulo, textoInicial, telefone, onFechar }: Props) {
     <dialog ref={dialogo} className={d.dialogo} tabIndex={-1} onClose={onFechar} onClick={(e) => e.target === dialogo.current && dialogo.current?.close()} aria-labelledby="cob-titulo">
       <div className={d.form}>
         <div className={d.topo}>
-          <span className="mono" id="cob-titulo">// {titulo}</span>
+          <span className="mono" id="cob-titulo">{titulo}</span>
           <button type="button" className={d.fechar} aria-label="Fechar" onClick={() => dialogo.current?.close()}>×</button>
         </div>
         <label className={d.campo}>

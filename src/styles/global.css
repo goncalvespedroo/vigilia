@@ -302,3 +302,5 @@ h1, h2 {
     transition-duration: 0.01ms !important;
   }
 }
+
+.carregando__fantasma { height: 10px; background: var(--surface-alta); border-radius: 2px; }

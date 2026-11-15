@@ -32,7 +32,7 @@ export function Reunioes() {
 
       {!carregando && reunioes.length === 0 && (
         <section className={`card ${s.vazio}`}>
-          <span className="mono">// NENHUMA CONVOCAÇÃO NO REGISTRO</span>
+          <span className="mono">NENHUMA CONVOCAÇÃO NO REGISTRO</span>
           <p>Agende reuniões com pauta, convoque agentes, marque presença e registre a ata com os encaminhamentos.</p>
           <button className="btn btn--destaque" onClick={() => setCriando(true)}>Convocar a primeira reunião</button>
         </section>

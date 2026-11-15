@@ -4,6 +4,7 @@ import { useDados } from '../lib/dados'
 import { AVANCO, codigoTarefa, ORDEM_STATUS, STATUS } from '../lib/rotulos'
 import { MetaTarefa } from './MetaTarefa'
 import s from './Kanban.module.css'
+import { recemConcluida } from '../lib/conclusao'
 
 const SETE_DIAS = 7 * 86_400_000
 
@@ -91,6 +92,7 @@ export function Kanban({ tarefas, onAbrir }: { tarefas: Tarefa[]; onAbrir: (id: 
                   <article
                     className={`${s.cartao} ${arrastando === t.id ? s.arrastando : ''}`}
                     data-status={t.status}
+                    data-recem={recemConcluida(t.id) || undefined}
                     draggable
                     onDragStart={(e) => {
                       e.dataTransfer.effectAllowed = 'move'
@@ -104,7 +106,10 @@ export function Kanban({ tarefas, onAbrir }: { tarefas: Tarefa[]; onAbrir: (id: 
                     onDragOver={(e) => sobreCartao(e, st, idx)}
                   >
                     <div className={s.cartaoTopo}>
-                      <span className="mono">{codigoTarefa(t.numero)}</span>
+                      <span className={s.codigo}>
+                        {codigoTarefa(t.numero)}
+                        {t.area_id && areaPorId.get(t.area_id)?.codigo ? ` · ${areaPorId.get(t.area_id)!.codigo}` : ''}
+                      </span>
                       <button
                         className={s.avancar}
                         data-para={AVANCO[t.status].para}

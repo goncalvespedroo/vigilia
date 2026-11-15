@@ -3,6 +3,7 @@ import { useDados } from '../lib/dados'
 import { PESO_PRIORIDADE, STATUS } from '../lib/rotulos'
 import { MetaTarefa } from './MetaTarefa'
 import s from './Checklist.module.css'
+import { recemConcluida } from '../lib/conclusao'
 
 const SETE_DIAS = 7 * 86_400_000
 
@@ -49,7 +50,7 @@ export function LinhaTarefa({ t, onAbrir }: { t: Tarefa; onAbrir: (id: string) =
   const { areaPorId, atualizarTarefa } = useDados()
   const feita = t.status === 'feito'
   return (
-    <div className={s.linha} data-status={t.status}>
+    <div className={s.linha} data-status={t.status} data-recem={recemConcluida(t.id) || undefined}>
       <input
         type="checkbox"
         className={s.check}
