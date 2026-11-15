@@ -15,9 +15,13 @@ interface Props {
   /** Encaminhamento de reunião: a tarefa nasce ligada a ela. */
   reuniaoId?: string
   placeholder?: string
+  /** Foca o campo ao montar (janela de nova missão). */
+  autoFoco?: boolean
+  /** Chamado com o título depois de registrar. */
+  aoRegistrar?: (titulo: string) => void
 }
 
-export function CapturaRapida({ areaPadrao, paraHoje, compacta, reuniaoId, placeholder }: Props) {
+export function CapturaRapida({ areaPadrao, paraHoje, compacta, reuniaoId, placeholder, autoFoco, aoRegistrar }: Props) {
   const { areas, membros, criarTarefa, semRede } = useDados()
   const [texto, setTexto] = useState('')
   const campo = useRef<HTMLInputElement>(null)
@@ -30,6 +34,7 @@ export function CapturaRapida({ areaPadrao, paraHoje, compacta, reuniaoId, place
   }, [texto, ativas, agentes, paraHoje])
 
   useEffect(() => {
+    if (autoFoco) return // dentro de janela: o atalho N é da página
     function tecla(e: KeyboardEvent) {
       if (e.key.toLowerCase() !== 'n' || e.ctrlKey || e.metaKey || e.altKey) return
       const alvo = e.target as HTMLElement
@@ -39,7 +44,7 @@ export function CapturaRapida({ areaPadrao, paraHoje, compacta, reuniaoId, place
     }
     window.addEventListener('keydown', tecla)
     return () => window.removeEventListener('keydown', tecla)
-  }, [])
+  }, [autoFoco])
 
   function enviar(e: FormEvent) {
     e.preventDefault()
@@ -54,7 +59,10 @@ export function CapturaRapida({ areaPadrao, paraHoje, compacta, reuniaoId, place
       ...cap.prazo,
     })
     // Offline a tarefa não é criada: mantém o texto para tentar de novo depois.
-    if (!semRede) setTexto('')
+    if (!semRede) {
+      setTexto('')
+      aoRegistrar?.(cap.titulo)
+    }
   }
 
   const reconhecido = [
@@ -72,6 +80,7 @@ export function CapturaRapida({ areaPadrao, paraHoje, compacta, reuniaoId, place
         <span className="sr">Registrar nova tarefa</span>
         <input
           ref={campo}
+          autoFocus={autoFoco}
           value={texto}
           onChange={(e) => setTexto(e.target.value)}
           placeholder={placeholder ?? (paraHoje ? 'Registrar diretriz para hoje…  (N)' : 'Registrar nova missão…  (N)')}

@@ -541,7 +541,7 @@ export function DadosProvider({ children }: { children: ReactNode }) {
       {children}
       {falha && (
         <div role="alert" className="aviso-falha">
-          <span className="mono" style={{ color: 'var(--c-destaque)' }}>FALHA NA TRANSMISSÃO</span>
+          <span className="mono" style={{ color: 'var(--danger-text)' }}>FALHA NA TRANSMISSÃO</span>
           <span>{falha}</span>
         </div>
       )}

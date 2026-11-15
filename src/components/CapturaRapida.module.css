@@ -5,12 +5,12 @@
   gap: var(--e-2);
   min-height: 52px;
   padding: 4px 4px 4px var(--e-4);
-  background: var(--c-painel-2);
-  border: 1px dashed var(--c-borda-forte);
-  border-radius: var(--r-pilula);
+  background: var(--surface-2);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--r-1);
 }
-.linha:focus-within { border-style: solid; border-color: var(--c-texto-2); }
-.mais { color: var(--c-texto-2); font-size: 20px; }
+.linha:focus-within { border-style: solid; border-color: var(--text-2); }
+.mais { color: var(--text-2); font-size: 20px; }
 .linha input {
   flex: 1;
   min-width: 0;

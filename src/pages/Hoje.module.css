@@ -1,29 +1,29 @@
 .cabeca { display: flex; flex-direction: column; gap: var(--e-2); }
-.titulo { margin: 0; font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.02em; line-height: 1.05; }
+.titulo { margin: 0; font-size: clamp(28px, 4vw, 40px); letter-spacing: 0.02em; line-height: 1.05; }
 .indicadores { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--e-3); }
 .indicador { display: flex; flex-direction: column; gap: var(--e-3); padding: var(--e-4); }
-.indicador h2 { margin: 0; font-size: 13px; font-weight: 500; color: var(--c-texto-2); }
+.indicador h2 { margin: 0; font-size: 13px; font-weight: 500; color: var(--text-2); }
 .numero { font-size: 36px; font-weight: 700; line-height: 1; }
-.numero small { font-size: 16px; color: var(--c-texto-2); font-weight: 500; }
+.numero small { font-size: 16px; color: var(--text-2); font-weight: 500; }
 .secoes { display: flex; flex-direction: column; gap: var(--e-4); max-width: 860px; }
 .secao { padding-top: var(--e-4); }
 .secaoCabeca { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--e-1); }
 .secaoCabeca h2 { margin: 0; font-size: 17px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
-.secaoCabeca h2::before { content: ''; width: 8px; height: 8px; border-radius: 2px; background: var(--c-texto); }
-.secao[data-marca='atrasada'] { border-color: color-mix(in srgb, var(--c-destaque) 45%, var(--c-borda)); }
-.secao[data-marca='atrasada'] h2::before { background: var(--c-destaque); }
-.secao[data-marca='hoje'] h2::before { background: var(--c-destaque); border-radius: 999px; }
-.secao[data-marca='andamento'] h2::before { background: var(--c-andamento); }
-.secao[data-marca='proxima'] h2::before { background: var(--c-texto-2); }
-.secao[data-marca='feita'] h2::before { background: var(--c-borda-forte); }
-.vazio { margin: 0; padding: var(--e-3) 0; color: var(--c-texto-2); font-size: 14px; }
-.erro { margin: 0; color: var(--c-destaque); }
+.secaoCabeca h2::before { content: ''; width: 8px; height: 8px; border-radius: 2px; background: var(--text); }
+.secao[data-marca='atrasada'] { border-color: color-mix(in srgb, var(--danger) 80%, var(--border)); }
+.secao[data-marca='atrasada'] h2::before { background: var(--danger-text); }
+.secao[data-marca='hoje'] h2::before { background: var(--accent); border-radius: var(--r-circulo); }
+.secao[data-marca='andamento'] h2::before { background: var(--warning); }
+.secao[data-marca='proxima'] h2::before { background: var(--text-2); }
+.secao[data-marca='feita'] h2::before { background: var(--border-strong); }
+.vazio { margin: 0; padding: var(--e-3) 0; color: var(--text-2); font-size: 14px; }
+.erro { margin: 0; color: var(--danger-text); }
 
 .reuniao {
   display: flex; align-items: center; gap: var(--e-3); min-height: 52px; flex-wrap: wrap;
-  border-bottom: 1px solid var(--c-divisor); padding: var(--e-2) 0;
+  border-bottom: 1px solid var(--divider); padding: var(--e-2) 0;
 }
 .reuniao:last-child { border-bottom: 0; }
-.reuniao:hover .reuniaoTitulo { text-decoration: underline; text-decoration-color: var(--c-borda-forte); }
-.reuniaoHora { font-family: var(--f-mono); font-size: 13px; color: var(--c-destaque); flex: none; }
+.reuniao:hover .reuniaoTitulo { text-decoration: underline; text-decoration-color: var(--border-strong); }
+.reuniaoHora { font-family: var(--f-mono); font-size: 13px; color: var(--accent); flex: none; }
 .reuniaoTitulo { flex: 1; min-width: 160px; font-size: 15px; }

@@ -20,14 +20,14 @@ export function TelaFalha({ erro }: { erro: unknown }) {
   const e = erro instanceof Error ? erro : new Error(String(erro))
   return (
     <div style={{ minHeight: '100dvh', display: 'grid', placeItems: 'center', padding: 16 }}>
-      <div className="card" style={{ maxWidth: 640, width: '100%', display: 'flex', flexDirection: 'column', gap: 14, borderColor: 'var(--c-destaque)' }}>
-        <span className="mono" style={{ color: 'var(--c-destaque)' }}>// FALHA NO SISTEMA</span>
+      <div className="card" style={{ maxWidth: 640, width: '100%', display: 'flex', flexDirection: 'column', gap: 14, borderColor: 'var(--danger)' }}>
+        <span className="mono" style={{ color: 'var(--danger-text)' }}>// FALHA NO SISTEMA</span>
         <h1 style={{ margin: 0, fontSize: 24 }}>Algo quebrou ao montar a tela.</h1>
-        <p style={{ margin: 0, color: 'var(--c-texto-2)', lineHeight: 1.5 }}>
+        <p style={{ margin: 0, color: 'var(--text-2)', lineHeight: 1.5 }}>
           Copie o texto abaixo e envie para análise. Se o problema persistir, use “Limpar dados locais” — seus dados no
           servidor não são afetados.
         </p>
-        <pre style={{ margin: 0, padding: 12, background: 'var(--c-painel-2)', border: '1px solid var(--c-borda)', borderRadius: 12, fontFamily: 'var(--f-mono)', fontSize: 12, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', maxHeight: 260, overflow: 'auto' }}>
+        <pre style={{ margin: 0, padding: 12, background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: 12, fontFamily: 'var(--f-mono)', fontSize: 12, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', maxHeight: 260, overflow: 'auto' }}>
           {`${e.name}: ${e.message}\n\n${e.stack ?? ''}\n\nBUILD ${__BUILD__} · ${location.pathname}`}
         </pre>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>

@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#0B0B0A" />
+    <meta name="theme-color" content="#080D13" />
     <meta name="color-scheme" content="dark" />
     <title>Vigília — Sistema de Operações</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=Special+Elite&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
     />
   </head>
   <body>
@@ -21,8 +21,8 @@
         var raiz = document.getElementById('root')
         if (!raiz || raiz.childElementCount) return
         raiz.innerHTML =
-          '<div style="padding:24px;font-family:monospace;color:#ECE7DC;background:#0B0B0A;min-height:100vh">' +
-          '<p style="color:#E5484D">// FALHA AO INICIAR O VIGÍLIA</p><pre style="white-space:pre-wrap"></pre>' +
+          '<div style="padding:24px;font-family:monospace;color:#D6DCE0;background:#080D13;min-height:100vh">' +
+          '<p style="color:#E08A96">// FALHA AO INICIAR O VIGÍLIA</p><pre style="white-space:pre-wrap"></pre>' +
           '<p>Recarregue com Ctrl+Shift+R. Se persistir, envie este texto.</p></div>'
         raiz.querySelector('pre').textContent = (e.message || 'erro') + '\n' + (e.filename || '') + ':' + (e.lineno || '')
       })

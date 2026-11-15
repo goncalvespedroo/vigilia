@@ -74,7 +74,7 @@ function CartaoReuniao({ r, agora }: { r: Reuniao; agora: Date }) {
         <span className="mono">{diaCurto(r.inicio, agora)} · {horario(r)}{r.local ? ` · ${r.local.length > 32 ? r.local.slice(0, 32) + '…' : r.local}` : ''}</span>
         <strong className={s.nome}>{r.titulo}</strong>
         <span className={s.meta}>
-          {area && <span className="selo"><span className="ponto-area" style={{ background: area.cor ?? 'var(--c-texto-2)' }} />{area.nome.toUpperCase()}</span>}
+          {area && <span className="selo"><span className="ponto-area" style={{ background: area.cor ?? 'var(--text-2)' }} />{area.nome.toUpperCase()}</span>}
           <span className="selo">{itens.length} {itens.length === 1 ? 'ITEM' : 'ITENS'} NA PAUTA</span>
           <span className="selo">{conv.length} {conv.length === 1 ? 'CONVOCADO' : 'CONVOCADOS'}</span>
         </span>

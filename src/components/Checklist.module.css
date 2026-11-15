@@ -10,7 +10,7 @@ details[open] > summary.cabeca { margin-bottom: var(--e-2); }
 .linha {
   display: flex; gap: var(--e-3); align-items: flex-start;
   padding: var(--e-3) 0;
-  border-bottom: 1px solid var(--c-divisor);
+  border-bottom: 1px solid var(--divider);
   min-height: var(--toque);
 }
 .linha:last-child { border-bottom: 0; }
@@ -20,11 +20,11 @@ details[open] > summary.cabeca { margin-bottom: var(--e-2); }
   background: none; border: 0; padding: 0; text-align: left; cursor: pointer;
   font-size: 15px; line-height: 1.35; overflow-wrap: anywhere;
 }
-.titulo:hover { text-decoration: underline; text-decoration-color: var(--c-borda-forte); }
-.linha[data-status='feito'] .titulo { color: var(--c-texto-2); text-decoration: line-through; }
+.titulo:hover { text-decoration: underline; text-decoration-color: var(--border-strong); }
+.linha[data-status='feito'] .titulo { color: var(--text-2); text-decoration: line-through; }
 .meta { display: flex; flex-wrap: wrap; gap: 6px; }
 .meta:empty { display: none; }
-.vazio { margin: 0; color: var(--c-texto-2); font-size: 14px; padding: var(--e-2) 0; }
+.vazio { margin: 0; color: var(--text-2); font-size: 14px; padding: var(--e-2) 0; }
 @media (pointer: coarse) {
   .check { width: 24px; height: 24px; }
 }

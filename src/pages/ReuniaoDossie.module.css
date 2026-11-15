@@ -1,24 +1,24 @@
-.trilha a { font-family: var(--f-mono); font-size: 12px; color: var(--c-texto-2); letter-spacing: 0.06em; }
-.trilha a:hover { color: var(--c-texto); }
+.trilha a { font-family: var(--f-mono); font-size: 12px; color: var(--text-2); letter-spacing: 0.06em; }
+.trilha a:hover { color: var(--text); }
 .cabeca { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--e-3); }
 .cabecaTexto { display: flex; flex-direction: column; gap: var(--e-2); min-width: 0; }
-.titulo { margin: 0; font-size: clamp(26px, 4vw, 38px); letter-spacing: -0.02em; line-height: 1.1; overflow-wrap: anywhere; }
-.titulo[data-sit='cancelada'] { text-decoration: line-through; color: var(--c-texto-2); }
-.local { align-self: flex-start; color: var(--c-destaque); font-weight: 600; min-height: var(--toque); display: inline-flex; align-items: center; }
-.localTexto { color: var(--c-texto-2); }
+.titulo { margin: 0; font-size: clamp(26px, 4vw, 38px); letter-spacing: 0.02em; line-height: 1.1; overflow-wrap: anywhere; }
+.titulo[data-sit='cancelada'] { text-decoration: line-through; color: var(--text-2); }
+.local { align-self: flex-start; color: var(--accent); font-weight: 600; min-height: var(--toque); display: inline-flex; align-items: center; }
+.localTexto { color: var(--text-2); }
 .pilula {
-  font-family: var(--f-mono); font-size: 11px; padding: 6px 12px; border-radius: var(--r-pilula);
-  border: 1px solid var(--c-borda-forte); white-space: nowrap;
+  font-family: var(--f-mono); font-size: 11px; padding: 6px 12px; border-radius: var(--r-selo);
+  border: 1px solid var(--border-strong); white-space: nowrap;
 }
-.pilula[data-sit='hoje'], .pilula[data-sit='em_andamento'] { background: var(--c-destaque); border-color: var(--c-destaque); color: var(--c-sobre-destaque); }
-.pilula[data-sit='aguardando_ata'] { border-color: var(--c-andamento); color: var(--c-andamento); }
+.pilula[data-sit='hoje'], .pilula[data-sit='em_andamento'] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.pilula[data-sit='aguardando_ata'] { border-color: var(--warning); color: var(--warning); }
 
 .barra { display: flex; flex-wrap: wrap; align-items: center; gap: var(--e-2); }
 .espaco { flex: 1; }
-.status { display: flex; gap: 4px; padding: 4px; background: var(--c-painel); border: 1px solid var(--c-borda); border-radius: var(--r-pilula); }
-.status button { min-height: 40px; padding: 0 var(--e-4); border: 0; border-radius: var(--r-pilula); background: transparent; cursor: pointer; font-size: 14px; }
-.status button[aria-pressed='true'] { background: var(--c-texto); color: var(--c-fundo); font-weight: 600; }
-.status button[aria-pressed='true'][data-valor='cancelada'] { background: var(--c-borda-forte); color: var(--c-texto); }
+.status { display: flex; gap: 4px; padding: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-2); }
+.status button { min-height: 40px; padding: 0 var(--e-4); border: 0; border-radius: var(--r-1); background: transparent; cursor: pointer; font-size: 14px; }
+.status button[aria-pressed='true'] { background: var(--surface-2); color: var(--accent); box-shadow: inset 0 0 0 1px var(--border-strong); font-weight: 600; }
+.status button[aria-pressed='true'][data-valor='cancelada'] { background: var(--border-strong); color: var(--text); }
 
 .grade { display: flex; flex-wrap: wrap; gap: var(--e-4); align-items: flex-start; }
 .principal { flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: var(--e-4); }
@@ -26,35 +26,35 @@
 .bloco { display: flex; flex-direction: column; gap: var(--e-3); }
 .blocoTopo { display: flex; justify-content: space-between; align-items: center; gap: var(--e-3); }
 .blocoTopo h2 { margin: 0; font-size: 17px; font-weight: 600; }
-.vazio { margin: 0; color: var(--c-texto-2); font-size: 14px; line-height: 1.5; }
-.link { text-decoration: underline; text-decoration-color: var(--c-borda-forte); }
+.vazio { margin: 0; color: var(--text-2); font-size: 14px; line-height: 1.5; }
+.link { text-decoration: underline; text-decoration-color: var(--border-strong); }
 
 /* Pauta */
 .pauta { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-.item { border-bottom: 1px solid var(--c-divisor); padding: 4px 0; }
+.item { border-bottom: 1px solid var(--divider); padding: 4px 0; }
 .itemLinha { display: flex; align-items: center; gap: var(--e-2); min-height: var(--toque); }
 .check { width: 20px; height: 20px; flex: none; margin: 0; cursor: pointer; }
-.num { font-family: var(--f-mono); font-size: 12px; color: var(--c-texto-2); flex: none; }
+.num { font-family: var(--f-mono); font-size: 12px; color: var(--text-2); flex: none; }
 .itemTexto { flex: 1; min-width: 0; background: transparent; border: 0; outline: none; font-size: 15px; padding: 8px 0; }
-.itemTexto:focus { border-bottom: 1px solid var(--c-borda-forte); }
-.item[data-discutido] .itemTexto { color: var(--c-texto-2); text-decoration: line-through; }
+.itemTexto:focus { border-bottom: 1px solid var(--border-strong); }
+.item[data-discutido] .itemTexto { color: var(--text-2); text-decoration: line-through; }
 .itemAcoes { display: flex; gap: 2px; flex: none; }
 .itemAcoes button {
-  width: 34px; height: 34px; border-radius: var(--r-pilula); border: 1px solid transparent; background: transparent;
-  color: var(--c-texto-2); cursor: pointer; font-size: 15px; position: relative;
+  width: 34px; height: 34px; border-radius: var(--r-1); border: 1px solid transparent; background: transparent;
+  color: var(--text-2); cursor: pointer; font-size: 15px; position: relative;
 }
 .itemAcoes button::after { content: ''; position: absolute; inset: -5px -1px; }
-.itemAcoes button:hover:not(:disabled) { color: var(--c-texto); border-color: var(--c-borda); }
-.itemAcoes button[aria-pressed='true'] { color: var(--c-texto); border-color: var(--c-borda-forte); }
-.itemAcoes button[data-perigo]:hover { color: var(--c-destaque); border-color: var(--c-destaque); }
+.itemAcoes button:hover:not(:disabled) { color: var(--text); border-color: var(--border); }
+.itemAcoes button[aria-pressed='true'] { color: var(--text); border-color: var(--border-strong); }
+.itemAcoes button[data-perigo]:hover { color: var(--danger-text); border-color: var(--danger); }
 .itemAcoes button:disabled { opacity: 0.25; cursor: default; }
 .notas {
   width: 100%; margin: 4px 0 8px; padding: var(--e-3); resize: vertical;
-  background: var(--c-painel-2); border: 1px solid var(--c-borda); border-radius: var(--r-interno); font-size: 14px; line-height: 1.45;
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--r-2); font-size: 14px; line-height: 1.45;
 }
 .novo {
   display: flex; align-items: center; gap: var(--e-2); min-height: var(--toque);
-  padding: 0 var(--e-3); border: 1px dashed var(--c-borda-forte); border-radius: var(--r-interno); color: var(--c-texto-2);
+  padding: 0 var(--e-3); border: 1px dashed var(--border-strong); border-radius: var(--r-2); color: var(--text-2);
 }
 .novo input { flex: 1; background: transparent; border: 0; outline: none; font-size: 15px; min-height: 40px; }
 
@@ -62,24 +62,24 @@
 .ata { display: flex; flex-direction: column; gap: 6px; }
 .ata textarea {
   width: 100%; padding: var(--e-3); resize: vertical; min-height: 160px;
-  background: var(--c-painel-2); border: 1px solid var(--c-borda); border-radius: var(--r-interno); font-size: 15px; line-height: 1.5;
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--r-2); font-size: 15px; line-height: 1.5;
 }
-.ata textarea:focus { outline: none; border-color: var(--c-texto-2); }
-.ata [data-estado='erro'] { color: var(--c-destaque); }
-.ata [data-estado='salvo'] { color: var(--c-texto-2); }
+.ata textarea:focus { outline: none; border-color: var(--text-2); }
+.ata [data-estado='erro'] { color: var(--danger-text); }
+.ata [data-estado='salvo'] { color: var(--text-2); }
 
 /* Convocados */
 .convocados { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-.convocado { display: flex; align-items: center; justify-content: space-between; gap: var(--e-2); border-bottom: 1px solid var(--c-divisor); }
+.convocado { display: flex; align-items: center; justify-content: space-between; gap: var(--e-2); border-bottom: 1px solid var(--divider); }
 .convocado:last-child { border-bottom: 0; }
 .convocar { display: flex; align-items: center; gap: var(--e-3); flex: 1; min-height: 52px; cursor: pointer; min-width: 0; }
 .convocar input { width: 20px; height: 20px; margin: 0; flex: none; }
 .convNome { display: flex; flex-direction: column; min-width: 0; }
-.convocado:not([data-convocado]) .convNome > span:first-child { color: var(--c-texto-2); }
+.convocado:not([data-convocado]) .convNome > span:first-child { color: var(--text-2); }
 .presenca { display: flex; gap: 4px; flex: none; }
 .presenca button {
-  width: 40px; height: 40px; border-radius: var(--r-pilula); border: 1px solid var(--c-borda); background: transparent;
-  cursor: pointer; color: var(--c-texto-2); font-size: 15px;
+  width: 40px; height: 40px; border-radius: var(--r-1); border: 1px solid var(--border); background: transparent;
+  cursor: pointer; color: var(--text-2); font-size: 15px;
 }
-.presenca button[data-tipo='sim'][aria-pressed='true'] { background: var(--c-texto); border-color: var(--c-texto); color: var(--c-fundo); }
-.presenca button[data-tipo='nao'][aria-pressed='true'] { background: var(--c-destaque); border-color: var(--c-destaque); color: var(--c-sobre-destaque); }
+.presenca button[data-tipo='sim'][aria-pressed='true'] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.presenca button[data-tipo='nao'][aria-pressed='true'] { background: var(--danger); border-color: var(--danger); color: var(--text); }

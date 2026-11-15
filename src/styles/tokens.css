@@ -1,30 +1,56 @@
 :root {
+  /* Paleta base (DESIGN-DIRECTIVE §4) — usar via tokens semânticos abaixo */
+  --void-black: #080d13;
+  --deep-navy: #111c27;
+  --midnight-blue: #1c3040;
+  --cold-blue: #397a98;
+  --spectral-cyan: #a6d5e5;
+  --ash-white: #d6dce0;
+  --dust-grey: #777d83;   /* só bordas e desativados: não passa contraste em texto */
+  --blood-red: #792f3b;
+  --aged-gold: #b59a68;
+
   /* Superfícies */
-  --c-fundo: #0b0b0a;
-  --c-painel: #141412;
-  --c-painel-2: #1b1a17;
-  --c-borda: #2b2925;
-  --c-borda-forte: #45423b;
-  --c-divisor: #201f1c;
+  --bg: var(--void-black);
+  --surface: var(--deep-navy);
+  --surface-translucida: rgb(17 28 39 / 0.85);
+  --surface-alta: #142330;      /* cabeçalho de modal, menus */
+  --surface-2: var(--midnight-blue);
+  --border: #1f3242;
+  --border-strong: #2e5268;
+  --divider: #172633;
 
   /* Texto */
-  --c-texto: #ece7dc;
-  --c-texto-2: #9c968a;
+  --text: var(--ash-white);
+  --text-2: #9aa3aa;
+  --text-off: var(--dust-grey);
 
   /* Estados */
-  --c-destaque: #e5484d;
-  --c-sobre-destaque: #0b0b0a;
-  --c-andamento: #e2a336;
+  --accent: var(--spectral-cyan);  /* elementos ativos */
+  --on-accent: var(--void-black);
+  --success: var(--cold-blue);
+  --warning: var(--aged-gold);     /* em campo, selos, classificação */
+  --danger: var(--blood-red);      /* só alertas; como fundo, texto --text por cima */
+  --danger-text: #e08a96;          /* vermelho legível sobre fundo escuro */
+  --critica: #c4515f;
+
+  /* Luz */
+  --brilho: 0 0 0 1px rgb(166 213 229 / 0.06), 0 10px 34px -14px rgb(57 122 152 / 0.55);
+  --brilho-forte: 0 0 22px -8px rgb(57 122 152 / 0.7);
+  --sombra-modal: 0 24px 60px -20px rgb(0 0 0 / 0.8), 0 0 40px -18px rgb(57 122 152 / 0.6);
+  --anel-foco: 0 0 0 3px rgb(166 213 229 / 0.12);
 
   /* Tipografia */
-  --f-ui: 'Space Grotesk', system-ui, sans-serif;
-  --f-mono: 'IBM Plex Mono', ui-monospace, monospace;
-  --f-carimbo: 'Special Elite', var(--f-mono);
+  --f-ui: 'Inter', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --f-titulo: 'Cinzel', Georgia, serif;
 
   /* Forma */
-  --r-card: 18px;
-  --r-interno: 14px;
-  --r-pilula: 999px;
+  --r-selo: 4px;
+  --r-1: 6px;     /* botões, campos */
+  --r-2: 8px;     /* itens internos */
+  --r-3: 10px;    /* cards, modais */
+  --r-circulo: 999px;
   --toque: 44px;
 
   /* Espaçamento */
@@ -34,4 +60,8 @@
   --e-4: 16px;
   --e-5: 20px;
   --e-6: 32px;
+
+  /* Movimento */
+  --t-rapida: 0.25s ease;
+  --t-entrada: 0.5s ease;
 }

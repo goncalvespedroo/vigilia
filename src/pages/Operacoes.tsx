@@ -62,7 +62,7 @@ export function Operacoes() {
             {areaFiltrada ? `// OPERAÇÃO ${areaFiltrada.codigo ?? ''}${areaFiltrada.arquivada ? ' · ARQUIVADA' : ''}` : '// QUADRO DE OPERAÇÕES'}
           </span>
           <div className={s.tituloLinha}>
-            {areaFiltrada && <span className="ponto-area" style={{ background: areaFiltrada.cor ?? 'var(--c-texto-2)', width: 14, height: 14 }} />}
+            {areaFiltrada && <span className="ponto-area" style={{ background: areaFiltrada.cor ?? 'var(--text-2)', width: 14, height: 14 }} />}
             <h1 className={s.titulo}>{areaFiltrada ? areaFiltrada.nome : filtro === 'nenhuma' ? 'Sem área' : 'Operações'}</h1>
             {areaFiltrada && (
               <button className="btn" onClick={() => setEditandoArea(areaFiltrada.id)}>
@@ -90,13 +90,13 @@ export function Operacoes() {
           .filter((a) => !a.arquivada)
           .map((a) => (
             <button key={a.id} aria-pressed={filtro === a.id} className={filtro === a.id ? s.filtroAtivo : undefined} onClick={() => mudar('area', a.id)}>
-              <span className="ponto-area" style={{ background: a.cor ?? 'var(--c-texto-2)' }} />
+              <span className="ponto-area" style={{ background: a.cor ?? 'var(--text-2)' }} />
               {a.nome}
             </button>
           ))}
         {areaFiltrada?.arquivada && (
           <button aria-pressed className={s.filtroAtivo}>
-            <span className="ponto-area" style={{ background: areaFiltrada.cor ?? 'var(--c-texto-2)' }} />
+            <span className="ponto-area" style={{ background: areaFiltrada.cor ?? 'var(--text-2)' }} />
             {areaFiltrada.nome}
           </button>
         )}

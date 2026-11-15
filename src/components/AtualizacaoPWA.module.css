@@ -6,10 +6,10 @@
   align-items: center;
   gap: var(--e-3);
   padding: var(--e-2) var(--e-2) var(--e-2) var(--e-4);
-  background: var(--c-painel-2);
-  border: 1px solid var(--c-borda);
-  border-left: 3px solid var(--c-destaque);
-  border-radius: var(--r-card);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--r-3);
   font-size: 14px;
   z-index: 100;
   animation: entrar 0.25s ease-out;
@@ -18,7 +18,7 @@
   font-family: var(--f-mono);
   font-size: 11px;
   letter-spacing: 0.08em;
-  color: var(--c-texto-2);
+  color: var(--text-2);
   white-space: nowrap;
 }
 .fechar {
@@ -26,11 +26,11 @@
   min-height: 44px;
   background: none;
   border: 0;
-  color: var(--c-texto-2);
+  color: var(--text-2);
   font-size: 20px;
   cursor: pointer;
 }
-.fechar:hover { color: var(--c-texto); }
+.fechar:hover { color: var(--text); }
 @keyframes entrar {
   from { opacity: 0; transform: translateY(8px); }
 }

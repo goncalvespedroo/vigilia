@@ -4,7 +4,7 @@ import { useDados } from '../lib/dados'
 import d from './Dialogo.module.css'
 import s from './EditorArea.module.css'
 
-export const CORES = ['#E5484D', '#E2A336', '#7CF08A', '#2DD4BF', '#8AB4F8', '#C084FC', '#F472B6', '#ECE7DC']
+export const CORES = ['#A6D5E5', '#5FA8C9', '#8C9EDB', '#C9A2C8', '#E08A96', '#B59A68', '#7FB7A4', '#D6DCE0']
 
 interface Props {
   /** Ausente = nova operação. Monte com key para reiniciar o formulário. */

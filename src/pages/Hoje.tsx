@@ -111,7 +111,7 @@ function Indicador({ rotulo, valor, destaque, sufixo = '' }: { rotulo: string; v
   return (
     <article className={`card ${s.indicador}`}>
       <h2>{rotulo}</h2>
-      <span className={s.numero} style={destaque ? { color: 'var(--c-destaque)' } : undefined}>
+      <span className={s.numero} style={destaque ? { color: 'var(--danger-text)' } : undefined}>
         {String(valor).padStart(2, '0')}
         {sufixo && <small>{sufixo}</small>}
       </span>

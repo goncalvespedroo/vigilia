@@ -7,7 +7,7 @@ import { diasEntre, formatarPrazo, inicioDoDia, situacao, somarDias } from '../l
 import { useAgora } from '../lib/useAgora'
 import { codigoTarefa, PESO_PRIORIDADE } from '../lib/rotulos'
 import { EditorArea } from '../components/EditorArea'
-import { EditorTarefa } from '../components/EditorTarefa'
+import { useCentral } from '../lib/central'
 import { CapturaRapida } from '../components/CapturaRapida'
 import { LinhaTarefa } from '../components/Checklist'
 import { Cobranca } from '../components/Cobranca'
@@ -30,14 +30,14 @@ function lerFoco() {
 
 export function Painel() {
   const { usuario } = useAuth()
-  const { areas, tarefas, membros, membroPorId, reunioes, participantes, carregando, erro, semRede } = useDados()
+  const { areas, tarefas, membros, membroPorId, reunioes, participantes, itensPauta, carregando, erro, semRede } = useDados()
   const agora = useAgora()
   const navegar = useNavigate()
   const [criandoArea, setCriandoArea] = useState(false)
-  const [editando, setEditando] = useState<string | null>(null)
   const [cobrando, setCobrando] = useState(false)
   const [focoEscolhido, setFocoEscolhido] = useState<string | null>(lerFoco)
 
+  const { abrirTarefa } = useCentral()
   const ativas = areas.filter((a) => !a.arquivada)
   const arquivadas = areas.filter((a) => a.arquivada)
   const pendentes = tarefas.filter((t) => t.status !== 'feito')
@@ -67,8 +67,14 @@ export function Painel() {
   const progressoSemana = encerradasSemana + restantesSemana ? encerradasSemana / (encerradasSemana + restantesSemana) : 0
   const em48h = pendentes.filter((t) => t.prazo && new Date(t.prazo) >= agora && new Date(t.prazo).getTime() - agora.getTime() <= 48 * 3600_000).length
 
-  // Distribuição das críticas por operação (mini-barras do indicador)
-  const criticasPorArea = ativas.map((a) => criticas.filter((t) => t.area_id === a.id).length)
+  const vencidas = pendentes.filter((t) => situacao(t, agora) === 'atrasada').length
+  // Missões registradas por dia nos últimos 14 dias (faísca do indicador)
+  const hojeZero = inicioDoDia(agora)
+  const faisca = Array.from({ length: 14 }, (_, i) => {
+    const dia = somarDias(hojeZero, i - 13)
+    return tarefas.filter((t) => mesmoDia(t.created_at, dia)).length
+  })
+  const faiscaMax = Math.max(1, ...faisca)
 
   // Operação em foco: a escolhida, ou a com mais pendências críticas/pendentes
   const foco = useMemo(() => {
@@ -82,6 +88,7 @@ export function Painel() {
   // Próxima convocação: a próxima reunião agendada; sem ela, uma tarefa do tipo reunião
   const proximaReuniao = reunioes.find((r) => porVir(r, agora))
   const convocados = proximaReuniao ? participantes.filter((p) => p.reuniao_id === proximaReuniao.id).length : 0
+  const itensDaPauta = proximaReuniao ? itensPauta.filter((i) => i.reuniao_id === proximaReuniao.id).length : 0
   const convocacao = pendentes
     .filter((t) => t.tipo === 'reuniao' && t.prazo && new Date(t.prazo).getTime() > agora.getTime() - 3600_000) // até 1h após o início
     .sort((a, b) => a.prazo!.localeCompare(b.prazo!))[0]
@@ -98,7 +105,6 @@ export function Painel() {
     .sort((a, b) => ordenarEntregas(a, b, agora))
     .slice(0, 6)
 
-  const emEdicao = editando ? tarefas.find((t) => t.id === editando) : undefined
   const turno = `${dd(agora.getDate())}.${dd(agora.getMonth() + 1)}.${agora.getFullYear()} · ${dd(agora.getHours())}:${dd(agora.getMinutes())}`
 
   function escolherFoco(id: string) {
@@ -114,7 +120,7 @@ export function Painel() {
     <>
       <section className={s.saudacao}>
         <div className={s.saudacaoTexto}>
-          <span className="mono">// TURNO {turno} · {semRede ? <span style={{ color: 'var(--c-destaque)' }}>CANAL INTERROMPIDO</span> : 'CANAL SEGURO'}</span>
+          <span className={s.turno}>TURNO {turno} · {semRede ? <span style={{ color: 'var(--danger-text)' }}>CANAL INTERROMPIDO</span> : 'CANAL SEGURO'}</span>
           <h1 className={s.titulo}>Bem-vindo de volta, Agente {nomeDoAgente(usuario)}.</h1>
           <p className={s.sub}>
             {carregando
@@ -124,7 +130,10 @@ export function Painel() {
                 : 'A vigília continua. Nenhum prazo nas próximas 48 horas.'}
           </p>
         </div>
-        <span className="carimbo">CONFIDENCIAL</span>
+        <span className={`carimbo ${s.carimbo}`}>
+          CONFIDENCIAL
+          <small>USO EXCLUSIVO · AGENTE {nomeDoAgente(usuario).toUpperCase()}</small>
+        </span>
       </section>
 
       {erro && <p className={s.erro}>Falha ao consultar a central: {erro}</p>}
@@ -136,36 +145,43 @@ export function Painel() {
             <article className={`card ${s.indicador}`}>
               <div className={s.indTopo}>
                 <h2>Missões ativas</h2>
-                <Link to="/operacoes" className={s.seta} aria-label="Ver missões ativas"><Seta /></Link>
+                <Link to="/operacoes" className={s.seta} aria-label="Ver missões ativas"><span>IND-01</span><Seta /></Link>
               </div>
               <div className={s.indCorpo}>
                 <span className={s.numero}>{dd(pendentes.length)}</span>
-                <div aria-hidden="true" className={s.hachura} />
-              </div>
-            </article>
-            <article className={`card ${s.indicador}`}>
-              <div className={s.indTopo}>
-                <h2>Pendências críticas</h2>
-                <Link to="/hoje" className={s.seta} aria-label="Ver pendências críticas"><Seta /></Link>
-              </div>
-              <div className={s.indCorpo}>
-                <span className={s.numero} style={criticas.length ? { color: 'var(--c-destaque)' } : undefined}>{dd(criticas.length)}</span>
-                <div aria-hidden="true" className={s.miniBarras}>
-                  {criticasPorArea.map((n, i) => (
-                    <div key={i} style={{ height: `${Math.max(12, (n / Math.max(1, ...criticasPorArea)) * 100)}%`, background: n ? ativas[i]!.cor ?? 'var(--c-destaque)' : 'var(--c-borda-forte)' }} />
+                <div className={s.faisca} role="img" aria-label="Missões registradas por dia nas últimas duas semanas">
+                  {faisca.map((n, i) => (
+                    <div key={i} data-recente={i >= 12 || undefined} style={{ height: `${Math.max(8, (n / faiscaMax) * 100)}%` }} />
                   ))}
                 </div>
               </div>
             </article>
             <article className={`card ${s.indicador}`}>
               <div className={s.indTopo}>
+                <h2>Pendências críticas</h2>
+                <Link to="/hoje" className={s.seta} aria-label="Ver pendências críticas"><span>IND-02</span><Seta /></Link>
+              </div>
+              <div className={`${s.indCorpo} ${s.indEntre}`}>
+                <span className={s.numero}>{dd(criticas.length)}</span>
+                {vencidas > 0 ? (
+                  <span className={s.vencidas}>{vencidas} {vencidas === 1 ? 'VENCIDA' : 'VENCIDAS'}</span>
+                ) : (
+                  <span className="mono">NENHUMA VENCIDA</span>
+                )}
+              </div>
+            </article>
+            <article className={`card ${s.indicador}`}>
+              <div className={s.indTopo}>
                 <h2>Encerradas na semana</h2>
-                <Link to="/operacoes?v=checklist" className={s.seta} aria-label="Ver missões encerradas"><Seta /></Link>
+                <Link to="/operacoes?v=checklist" className={s.seta} aria-label="Ver missões encerradas"><span>IND-03</span><Seta /></Link>
               </div>
               <div className={s.indCorpo}>
                 <span className={s.numero}>{dd(encerradasSemana)}</span>
-                <div className={s.progresso} role="img" aria-label={`${Math.round(progressoSemana * 100)}% dos prazos da semana cumpridos`}>
-                  <div style={{ width: `${progressoSemana * 100}%` }} />
+                <div className={s.progressoBloco}>
+                  <span className="mono">{encerradasSemana} / {encerradasSemana + restantesSemana}</span>
+                  <div className={s.progresso} role="img" aria-label={`${Math.round(progressoSemana * 100)}% dos prazos da semana cumpridos`}>
+                    <div style={{ width: `${progressoSemana * 100}%` }} />
+                  </div>
                 </div>
               </div>
             </article>
@@ -183,19 +199,19 @@ export function Painel() {
               <div className={s.semana} role="img" aria-label={semana.map((d) => `${d.rotulo}: ${d.concluidas} de ${d.planejadas}`).join('; ')}>
                 {semana.map((d) => (
                   <div key={d.rotulo} className={s.dia} data-hoje={d.hoje || undefined}>
-                    <span className={s.diaNum}>{d.concluidas}/{d.planejadas}</span>
+                    <span className={s.diaNum} title={`${d.concluidas} concluídas de ${d.planejadas} planejadas`}>{dd(d.concluidas)}</span>
                     <div className={s.trilho}>
                       <div className={s.planejada} style={{ height: `${(d.planejadas / escala) * 100}%` }} />
                       <div className={s.concluida} style={{ height: `${(d.concluidas / escala) * 100}%` }} />
                     </div>
-                    <span className="mono">{d.rotulo}</span>
+                    <span className={s.diaRotulo}>{d.rotulo}</span>
                   </div>
                 ))}
               </div>
             </article>
 
             {/* Operação em foco */}
-            {foco ? <CartaoFoco area={foco} ativas={ativas} tarefas={tarefas} agora={agora} onEscolher={escolherFoco} onAbrir={setEditando} /> : null}
+            {foco ? <CartaoFoco area={foco} ativas={ativas} tarefas={tarefas} agora={agora} onEscolher={escolherFoco} onAbrir={abrirTarefa} /> : null}
           </div>
 
           <div className={s.linhaEquipe}>
@@ -218,21 +234,21 @@ export function Painel() {
               <div className={s.tabelaRolagem}>
                 <table className={s.tabela}>
                   <thead>
-                    <tr><th>Agente</th><th>Entrega</th><th>Prazo</th><th>Status</th></tr>
+                    <tr><th>AGENTE</th><th>ENTREGA</th><th>PRAZO</th><th>STATUS</th></tr>
                   </thead>
                   <tbody>
                     {emCampo.map((t) => {
                       const m = membroPorId.get(t.responsavel_id!)!
                       const sit = situacaoEntrega(t, agora)
                       return (
-                        <tr key={t.id} onClick={() => setEditando(t.id)}>
+                        <tr key={t.id} onClick={() => abrirTarefa(t.id)}>
                           <td>
                             <div className={s.agenteCel}>
                               <div aria-hidden="true" className={s.avatarP}>{m.nome.charAt(0).toUpperCase()}</div>
                               <div className={s.agenteTxt}><span>{m.nome}</span><span className="mono">{(m.funcao ?? '').toUpperCase()}</span></div>
                             </div>
                           </td>
-                          <td><button className={s.entregaBtn} onClick={(e) => { e.stopPropagation(); setEditando(t.id) }}>{t.titulo}</button></td>
+                          <td><button className={s.entregaBtn} onClick={(e) => { e.stopPropagation(); abrirTarefa(t.id) }}>{t.titulo}</button></td>
                           <td className={s.prazoCel}>{t.prazo ? `${dd(new Date(t.prazo).getDate())}/${dd(new Date(t.prazo).getMonth() + 1)}` : '—'}</td>
                           <td><span className={s.pilula} data-sit={sit}>{ROTULO_ENTREGA[sit]}</span></td>
                         </tr>
@@ -256,7 +272,7 @@ export function Painel() {
             {!carregando && ativas.length === 0 && <p className={s.sub}>Nenhuma operação ativa.</p>}
             <div className={s.listaOps}>
               {ativas.map((a, i) => (
-                <ItemOperacao key={a.id} area={a} indice={i} pendentes={pendentes.filter((t) => t.area_id === a.id).length} />
+                <ItemOperacao key={a.id} area={a} indice={i} emFoco={a.id === foco?.id} pendentes={pendentes.filter((t) => t.area_id === a.id).length} />
               ))}
             </div>
             {arquivadas.length > 0 && (
@@ -276,18 +292,24 @@ export function Painel() {
         <aside className={s.lateral}>
           {/* Próxima convocação */}
           <article className={`card ${s.bloco}`}>
-            <h2 className={s.h2}>Próxima convocação</h2>
+            <div className={s.blocoTopo}>
+              <h2 className={s.h2}>Próxima convocação</h2>
+              <Link to="/reunioes" className={s.mais} aria-label="Ver reuniões">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+              </Link>
+            </div>
             {proximaReuniao ? (
               <div className={s.pilha}>
                 <div aria-hidden="true" className={s.folha1} />
                 <div aria-hidden="true" className={s.folha2} />
                 <div className={s.convocacao}>
-                  <span className="mono" style={{ color: 'var(--c-destaque)' }}>● CONVOCAÇÃO · {diaCurto(proximaReuniao.inicio, agora)}</span>
+                  <span className={s.convMeta}>CONVOCAÇÃO · {diaCurto(proximaReuniao.inicio, agora).toUpperCase()} · {horario(proximaReuniao)}</span>
                   <span className={s.convTitulo}>{proximaReuniao.titulo}</span>
-                  <span className="mono">
-                    {horario(proximaReuniao)} · {convocados} {convocados === 1 ? 'agente convocado' : 'agentes convocados'}
+                  <span className={s.sub}>
+                    {convocados} {convocados === 1 ? 'agente convocado' : 'agentes convocados'} · {itensDaPauta} {itensDaPauta === 1 ? 'item' : 'itens'} de pauta
                   </span>
                   <Link to={`/reunioes/${proximaReuniao.id}`} className={`btn btn--destaque ${s.convBotao}`}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M4 4h11l5 5v11H4zM14 4v6h6" /></svg>
                     Abrir dossiê da reunião
                   </Link>
                 </div>
@@ -297,14 +319,12 @@ export function Painel() {
                 <div aria-hidden="true" className={s.folha1} />
                 <div aria-hidden="true" className={s.folha2} />
                 <div className={s.convocacao}>
-                  <span className="mono" style={{ color: 'var(--c-destaque)' }}>
-                    ● CONVOCAÇÃO · {formatarPrazo(convocacao.prazo!, true, agora)}
-                  </span>
+                  <span className={s.convMeta}>CONVOCAÇÃO · {formatarPrazo(convocacao.prazo!, true, agora)}</span>
                   <span className={s.convTitulo}>{convocacao.titulo}</span>
-                  <span className="mono">
+                  <span className={s.sub}>
                     {convocacao.prazo_dia_inteiro ? 'HORÁRIO A DEFINIR' : formatarPrazo(convocacao.prazo!, false, agora).split(' · ')[1]}
                   </span>
-                  <button className={`btn btn--destaque ${s.convBotao}`} onClick={() => setEditando(convocacao.id)}>
+                  <button className={`btn btn--destaque ${s.convBotao}`} onClick={() => abrirTarefa(convocacao.id)}>
                     Abrir dossiê da reunião
                   </button>
                 </div>
@@ -321,8 +341,13 @@ export function Painel() {
               <span className="mono">{diretrizesFeitas} / {diretrizes.length}</span>
             </div>
             <div>
-              {diretrizes.length === 0 && <p className={s.sub}>Nada vence hoje.</p>}
-              {diretrizes.map((t) => <LinhaTarefa key={t.id} t={t} onAbrir={setEditando} />)}
+              {diretrizes.length === 0 && (
+                <div className="vazio">
+                  <strong>Arquivo vazio</strong>
+                  Nenhuma diretriz para hoje. A vigília está em paz — por enquanto.
+                </div>
+              )}
+              {diretrizes.map((t) => <LinhaTarefa key={t.id} t={t} onAbrir={abrirTarefa} />)}
             </div>
             <CapturaRapida paraHoje compacta />
           </article>
@@ -338,7 +363,6 @@ export function Painel() {
         />
       )}
       {criandoArea && <EditorArea onFechar={() => setCriandoArea(false)} onCriada={(id) => navegar(`/operacoes?area=${id}`)} />}
-      {emEdicao && <EditorTarefa key={emEdicao.id} tarefa={emEdicao} onFechar={() => setEditando(null)} />}
     </>
   )
 }
@@ -370,7 +394,7 @@ function CartaoFoco({ area, ativas, tarefas, agora, onEscolher, onAbrir }: FocoP
     <article className={`card ${s.bloco}`}>
       <div className={s.blocoTopo}>
         <div className={s.blocoTitulo}>
-          <span className="mono" style={maxima ? { color: 'var(--c-destaque)' } : undefined}>
+          <span className={s.focoMeta} data-maxima={maxima || undefined}>
             {area.codigo ?? 'OPERAÇÃO'} · {maxima ? 'PRIORIDADE MÁXIMA' : 'EM FOCO'}
           </span>
           <h2>Operação {area.nome}</h2>
@@ -390,24 +414,24 @@ function CartaoFoco({ area, ativas, tarefas, agora, onEscolher, onAbrir }: FocoP
       </div>
       <div aria-hidden="true" className={s.ticks}>
         {Array.from({ length: 40 }, (_, i) => (
-          <div key={i} style={{ background: i < nFeitas ? 'var(--c-texto)' : i < nFeitas + nFazendo ? 'var(--c-andamento)' : 'var(--c-borda)' }} />
+          <div key={i} data-fase={i < nFeitas ? 'feito' : i < nFeitas + nFazendo ? 'fazendo' : undefined} />
         ))}
       </div>
       <div className={s.legenda}>
-        <span><i style={{ background: 'var(--c-texto)' }} />Concluído</span>
-        <span><i style={{ background: 'var(--c-andamento)' }} />Em andamento</span>
-        <span><i style={{ background: 'var(--c-borda)', outline: '1px solid var(--c-borda-forte)' }} />A fazer</span>
+        <span><i data-fase="feito" />Concluído</span>
+        <span><i data-fase="fazendo" />Em andamento</span>
+        <span><i />A fazer</span>
       </div>
       <div className={s.subcartoes}>
-        <button className={s.subcartao} disabled={!atual} onClick={() => atual && onAbrir(atual.id)}>
-          <span className={s.subRotulo}>Em andamento</span>
+        <button className={s.subcartao} data-ativo={atual ? '' : undefined} disabled={!atual} onClick={() => atual && onAbrir(atual.id)}>
+          <span className={s.subRotulo}>EM ANDAMENTO</span>
           <span className={s.subTitulo}>{atual?.titulo ?? '—'}</span>
           <span className="mono">{atual ? codigoTarefa(atual.numero) : 'NADA EM CAMPO'}</span>
         </button>
         <button className={s.subcartao} disabled={!proxima} onClick={() => proxima && onAbrir(proxima.id)}>
-          <span className={s.subRotulo}>Próximo prazo</span>
+          <span className={s.subRotulo}>PRÓXIMO PRAZO</span>
           <span className={s.subTitulo}>{proxima?.titulo ?? '—'}</span>
-          <span className="mono" style={proxima && situacao(proxima, agora) === 'atrasada' ? { color: 'var(--c-destaque)' } : undefined}>
+          <span className="mono" style={proxima && situacao(proxima, agora) === 'atrasada' ? { color: 'var(--danger-text)' } : undefined}>
             {proxima ? formatarPrazo(proxima.prazo!, proxima.prazo_dia_inteiro, agora) : 'SEM PRAZOS'}
           </span>
         </button>
@@ -416,16 +440,18 @@ function CartaoFoco({ area, ativas, tarefas, agora, onEscolher, onAbrir }: FocoP
   )
 }
 
-function ItemOperacao({ area: a, indice, pendentes: n }: { area: Area; indice: number; pendentes: number }) {
+function ItemOperacao({ area: a, indice, pendentes: n, emFoco }: { area: Area; indice: number; pendentes: number; emFoco?: boolean }) {
   return (
-    <Link to={`/operacoes?area=${a.id}`} className={s.op} data-arquivada={a.arquivada || undefined}>
-      <span className={s.opNum} style={{ color: a.cor ?? undefined }}>{dd(indice + 1)}</span>
+    <Link to={`/operacoes?area=${a.id}`} className={s.op} data-arquivada={a.arquivada || undefined} data-foco={emFoco || undefined}>
+      <span className={s.opNum}>{dd(indice + 1)}</span>
+      <span className="ponto-area" style={{ background: a.cor ?? 'var(--text-2)' }} />
       <span className={s.opTexto}>
         <span className={s.opNome}>{a.nome}</span>
         <span className="mono">
-          {a.codigo ?? '—'} · {n} {n === 1 ? 'PENDENTE' : 'PENDENTES'}
+          {a.codigo ?? '—'} · {n} {n === 1 ? 'MISSÃO' : 'MISSÕES'}
         </span>
       </span>
+      <svg className={s.opSeta} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
     </Link>
   )
 }

@@ -11,15 +11,18 @@ Gerenciador de tarefas pessoal do Pedro (estudante de Ciência da Computação),
 - Nada que gere custo. Se uma solução exigir serviço pago, pare e pergunte.
 
 ## Identidade visual
-Estética de "organização secreta": terminal confidencial, dossiês, códigos de operação. Tema escuro.
+Diretriz completa em `docs/design/DESIGN-DIRECTIVE.md`. Resumo: organização secreta, cinematográfica, escura, imersiva — arquivo confidencial + central de operações. Identidade própria, sem reproduzir símbolos de outras obras.
 
-- Fundo `#0B0B0A` · painel `#141412` · painel 2 `#1B1A17` · borda `#2B2925`
-- Texto `#ECE7DC` · texto secundário `#9C968A`
-- Destaque `#E5484D` (texto escuro `#0B0B0A` por cima) · em andamento `#E2A336`
-- Fontes: Space Grotesk (interface), IBM Plex Mono (metadados, códigos), Special Elite (só carimbos)
-- Cards com raio 18px, botões em pílula, alvos de toque ≥ 44px
+Tokens (CSS variables):
+- `--bg #080D13` · `--surface #111C27` · `--surface-2 #1C3040` · `--border #1F3242` · `--border-strong #2E5268`
+- `--text #D6DCE0` · `--text-2 #9AA3AA` (Dust Grey `#777D83` só em bordas/desativados — não passa contraste em texto)
+- `--accent #A6D5E5` (ciano: elementos ativos; texto `#080D13` por cima) · `--success #397A98` · `--warning #B59A68` (também selos/classificação) · `--danger #792F3B` (só alertas; como fundo com texto `#D6DCE0`; texto vermelho sobre fundo escuro usa `#E08A96`)
+- Fontes: Cinzel (títulos institucionais), Inter (texto e UI), JetBrains Mono (códigos, datas, metadados)
+- Raios 6/8/10px, bordas 1px, fundo com brilho radial azul sutil + grão (feTurbulence, opacidade ~0,07)
+- Hover: borda `#2E5268` + brilho azul suave; painéis entram subindo 6px em 0,5s; respeitar `prefers-reduced-motion`
+- Alvos de toque ≥ 44px; contraste mínimo 4,5:1
 - Vocabulário: Painel, Operações (projetos), Dossiês, Reuniões/Convocações, Calendário, Agentes (equipe), Cofre (finanças), Diretrizes (checklist do dia)
-- Referência visual: `design/painel.html`
+- Referências visuais: `design/painel.html` e `design/sistema-design.html`
 
 ## Domínio
 - Áreas: Faculdade, Equipe (comunicação do projeto de extensão), TCC, Pessoal — personalizáveis
