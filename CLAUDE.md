@@ -42,3 +42,4 @@ Row Level Security em todas: `user_id = auth.uid()`.
 - Chaves (Supabase, VAPID) só em `.env`, nunca no código. Mantenha um `.env.example`.
 - Migrações SQL versionadas em `supabase/migrations/`.
 - Interface e textos em português do Brasil.
+- Atualizações do PWA: `registerType: 'autoUpdate'` (vite-plugin-pwa), checagem de versão nova a cada 1 hora (`registration.update()`). Nunca recarregar enquanto o usuário estiver digitando ou com formulário/diálogo aberto — esperar sair do campo, fechar o diálogo ou a janela ir para segundo plano. Após recarregar, aviso discreto: "Sistema atualizado para a versão X". Lógica em `src/lib/atualizacao.ts`.

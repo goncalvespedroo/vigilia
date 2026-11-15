@@ -1,4 +1,5 @@
 /// <reference lib="webworker" />
+import { clientsClaim } from 'workbox-core'
 import { cleanupOutdatedCaches, createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching'
 import { NavigationRoute, registerRoute } from 'workbox-routing'
 import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies'
@@ -26,10 +27,10 @@ registerRoute(
   }),
 )
 
-// O app pede para ativar a nova versão quando o usuário aceitar.
-self.addEventListener('message', (event) => {
-  if (event.data?.type === 'SKIP_WAITING') self.skipWaiting()
-})
+// autoUpdate: a versão nova assume assim que instalada. A página aberta segue
+// com o JS antigo (já carregado) até o app decidir recarregar.
+self.skipWaiting()
+clientsClaim()
 
 // ---------------------------------------------------------------------------
 // Web Push

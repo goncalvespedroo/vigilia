@@ -3,16 +3,41 @@
   inset: auto 16px 16px auto;
   max-width: calc(100vw - 32px);
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   gap: var(--e-3);
-  padding: var(--e-3) var(--e-3) var(--e-3) var(--e-4);
+  padding: var(--e-2) var(--e-2) var(--e-2) var(--e-4);
   background: var(--c-painel-2);
   border: 1px solid var(--c-borda);
+  border-left: 3px solid var(--c-destaque);
   border-radius: var(--r-card);
   font-size: 14px;
   z-index: 100;
+  animation: entrar 0.25s ease-out;
+}
+.selo {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--c-texto-2);
+  white-space: nowrap;
+}
+.fechar {
+  min-width: 44px;
+  min-height: 44px;
+  background: none;
+  border: 0;
+  color: var(--c-texto-2);
+  font-size: 20px;
+  cursor: pointer;
+}
+.fechar:hover { color: var(--c-texto); }
+@keyframes entrar {
+  from { opacity: 0; transform: translateY(8px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aviso { animation: none; }
 }
 @media (max-width: 720px) {
   .aviso { inset: auto 12px calc(96px + env(safe-area-inset-bottom)) 12px; }
+  .selo { display: none; }
 }

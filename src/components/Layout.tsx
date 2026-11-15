@@ -5,7 +5,6 @@ import { sincronizarPush } from '../lib/push'
 import { nomeDoAgente, useAuth } from '../lib/auth'
 import { useDados } from '../lib/dados'
 import { Emblema } from './Emblema'
-import { AtualizacaoPWA } from './AtualizacaoPWA'
 import s from './Layout.module.css'
 
 const SECOES = [
@@ -83,7 +82,7 @@ export function Layout() {
       </main>
 
       <footer className={s.rodape}>
-        <span>VIGÍLIA v0.1 · BUILD {__BUILD__} · USO RESTRITO</span>
+        <span>VIGÍLIA v{__VERSAO__} · BUILD {__BUILD__} · USO RESTRITO</span>
         <span className={s.sincronia} data-estado={estado}>
           {estado === 'semrede'
             ? '○ CANAL INTERROMPIDO'
@@ -95,7 +94,6 @@ export function Layout() {
         </span>
       </footer>
 
-      <AtualizacaoPWA />
       {alertasAbertos && <Notificacoes onFechar={() => setAlertasAbertos(false)} />}
     </div>
   )

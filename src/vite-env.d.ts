@@ -12,3 +12,6 @@ interface ImportMeta {
 
 /** Data/hora em que o servidor de dev subiu ou o build foi gerado. */
 declare const __BUILD__: string
+
+/** Versão do package.json. */
+declare const __VERSAO__: string

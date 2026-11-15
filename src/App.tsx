@@ -10,6 +10,7 @@ import { Agentes } from './pages/Agentes'
 import { Reunioes } from './pages/Reunioes'
 import { ReuniaoDossie } from './pages/ReuniaoDossie'
 import { DadosProvider } from './lib/dados'
+import { AtualizacaoPWA } from './components/AtualizacaoPWA'
 
 export function App() {
   return (
@@ -36,6 +37,7 @@ export function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
+      <AtualizacaoPWA />
     </AuthProvider>
   )
 }

@@ -1,13 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
+import pkg from './package.json' with { type: 'json' }
 
 const agora = new Date()
 const dd = (n: number) => String(n).padStart(2, '0')
-const BUILD = `${dd(agora.getDate())}.${dd(agora.getMonth() + 1)} ${dd(agora.getHours())}:${dd(agora.getMinutes())}`
+const BUILD = process.env.VIGILIA_BUILD ?? `${dd(agora.getDate())}.${dd(agora.getMonth() + 1)} ${dd(agora.getHours())}:${dd(agora.getMinutes())}`
 
 export default defineConfig({
-  define: { __BUILD__: JSON.stringify(BUILD) },
+  define: { __BUILD__: JSON.stringify(BUILD), __VERSAO__: JSON.stringify(pkg.version) },
   plugins: [
     react(),
     VitePWA({
@@ -15,7 +16,9 @@ export default defineConfig({
       strategies: 'injectManifest',
       srcDir: 'src',
       filename: 'sw.ts',
-      registerType: 'prompt',
+      // Atualiza sozinho; o recarregamento é adiado enquanto houver digitação
+      // ou formulário aberto (ver src/lib/atualizacao.ts).
+      registerType: 'autoUpdate',
       injectRegister: false,
       pwaAssets: { disabled: false, config: true },
       manifest: {
