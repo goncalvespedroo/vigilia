@@ -26,7 +26,7 @@
 .seta {
   display: inline-flex; align-items: center; gap: 6px;
   min-height: 32px; padding: 0 4px;
-  font-family: var(--f-mono); font-size: 10px; color: var(--text-off);
+  font-family: var(--f-mono); font-size: 10px; color: var(--text-2);
   border-radius: var(--r-selo);
   transition: color var(--t-rapida);
 }
@@ -123,7 +123,8 @@
 }
 .op:hover { border-color: var(--border-strong); box-shadow: var(--brilho-forte); }
 .op[data-foco] { background: var(--surface-2); border-color: var(--success); color: var(--accent); }
-.op[data-arquivada] { opacity: 0.55; }
+.op[data-arquivada] { background: transparent; border-style: dashed; }
+.op[data-arquivada] .opNome { color: var(--text-2); }
 .opNum { width: 22px; flex: none; font-family: var(--f-mono); font-size: 11px; color: var(--text-2); }
 .opTexto { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
 .opTexto :global(.mono) { font-size: 10px; letter-spacing: 0.06em; }
@@ -182,3 +183,9 @@
 }
 .pilula[data-sit='atrasado'] { background: var(--danger); border-color: var(--danger); color: var(--text); }
 .pilula[data-sit='em_campo'] { border-color: var(--warning); color: var(--warning); }
+
+/* Celular: o carimbo é decorativo, não pode empurrar a informação */
+@media (max-width: 720px) {
+  .carimbo { display: none; }
+  .saudacao { padding-bottom: var(--e-4); }
+}

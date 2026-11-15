@@ -120,7 +120,7 @@ export function Calendario() {
               <span key={d}>{d}</span>
             ))}
           </div>
-          <div className={s.dias} role="grid" aria-label={`${MESES[mesBase.getMonth()]} de ${mesBase.getFullYear()}`}>
+          <div className={s.dias} role="group" aria-label={`${MESES[mesBase.getMonth()]} de ${mesBase.getFullYear()}`}>
             {dias.map((dia) => {
               const k = chave(dia)
               const itens = porDia.get(k) ?? []
@@ -129,7 +129,6 @@ export function Calendario() {
               return (
                 <div
                   key={k}
-                  role="gridcell"
                   className={s.dia}
                   data-fora={fora || undefined}
                   data-hoje={diasEntre(dia, hoje) === 0 || undefined}

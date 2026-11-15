@@ -9,7 +9,7 @@
   border: 1px dashed var(--border-strong);
   border-radius: var(--r-1);
 }
-.linha:focus-within { border-style: solid; border-color: var(--text-2); }
+.linha:focus-within { border-style: solid; border-color: var(--success); box-shadow: var(--anel-foco); }
 .mais { color: var(--text-2); font-size: 20px; }
 .linha input {
   flex: 1;

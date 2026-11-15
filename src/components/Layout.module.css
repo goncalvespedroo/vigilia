@@ -109,7 +109,7 @@
 .marcaMovel { display: none; align-items: center; gap: 10px; }
 .marcaMovel .nome { font-size: 16px; }
 .trilha { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.08em; color: var(--text-2); }
-.barra { color: var(--text-off); }
+.barra { color: var(--text-2); }
 .trilhaAtual { color: var(--text); }
 
 .lado { display: flex; align-items: center; gap: 10px; }
@@ -153,14 +153,34 @@
   border-radius: var(--r-2);
   padding: 4px 14px 4px 4px;
 }
+.agente { position: relative; }
 .avatar {
-  width: 34px; height: 34px;
+  width: 34px; height: 34px; padding: 0; cursor: pointer; position: relative;
   border-radius: var(--r-1);
   background: var(--surface-2);
   border: 1px solid var(--border-strong);
   display: grid; place-items: center;
   font-family: var(--f-titulo); font-weight: 700; font-size: 15px; color: var(--accent);
 }
+.avatar::after { content: ''; position: absolute; inset: -5px; }
+.avatar:hover, .avatar[aria-expanded='true'] { border-color: var(--success); box-shadow: var(--brilho-forte); }
+.menu {
+  position: absolute; top: calc(100% + 8px); right: 0; z-index: 60;
+  width: 220px; padding: 6px;
+  display: flex; flex-direction: column;
+  background: var(--surface-alta); border: 1px solid var(--border-strong); border-radius: var(--r-2);
+  box-shadow: 0 18px 40px -16px rgb(0 0 0 / 0.8);
+  animation: subir 0.18s ease-out;
+}
+.menuCabeca { padding: 8px 10px; font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--text-2); }
+.menuItem {
+  min-height: 40px; padding: 0 10px; text-align: left;
+  background: transparent; border: 0; border-radius: var(--r-1); cursor: pointer; font-size: 14px;
+}
+.menuItem:hover, .menuItem:focus-visible { background: var(--surface-2); color: var(--accent); }
+.menuPerigo { color: var(--danger-text); }
+.menuPerigo:hover, .menuPerigo:focus-visible { color: var(--danger-text); }
+.menuDivisor { height: 1px; background: var(--border); margin: 6px 4px; }
 .agenteTexto { display: flex; flex-direction: column; align-items: flex-start; }
 .agenteNome { font-size: 14px; font-weight: 600; }
 .sair {
@@ -243,4 +263,9 @@
   }
   .linkMovel.ativo { background: var(--surface-2); color: var(--accent); font-weight: 600; }
   .linkMovel .contador { position: absolute; top: 3px; right: 10px; margin: 0; padding: 0 5px; font-size: 10px; }
+}
+
+@media (max-width: 400px) {
+  .marcaMovel .nome { display: none; }
+  .cabecalho { flex-wrap: nowrap; }
 }

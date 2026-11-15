@@ -4,6 +4,7 @@ import { Notificacoes } from './Notificacoes'
 import { Busca } from './Busca'
 import { NovaMissao } from './NovaMissao'
 import { EditorTarefa } from './EditorTarefa'
+import { EditorCodinome } from './EditorCodinome'
 import { sincronizarPush } from '../lib/push'
 import { nomeDoAgente, useAuth } from '../lib/auth'
 import { useDados } from '../lib/dados'
@@ -34,6 +35,22 @@ export function Layout() {
   const [buscaAberta, setBuscaAberta] = useState(false)
   const [novaAberta, setNovaAberta] = useState(false)
   const [tarefaAberta, setTarefaAberta] = useState<string | null>(null)
+  const [menuAgente, setMenuAgente] = useState(false)
+  const [renomeando, setRenomeando] = useState(false)
+
+  // Fecha o menu do agente ao clicar fora ou apertar Esc
+  useEffect(() => {
+    if (!menuAgente) return
+    const fechar = (e: Event) => {
+      if (e instanceof KeyboardEvent ? e.key === 'Escape' : !(e.target as HTMLElement).closest('[data-menu-agente]')) setMenuAgente(false)
+    }
+    document.addEventListener('pointerdown', fechar)
+    document.addEventListener('keydown', fechar)
+    return () => {
+      document.removeEventListener('pointerdown', fechar)
+      document.removeEventListener('keydown', fechar)
+    }
+  }, [menuAgente])
 
   // Se o push já está ativo, mantém o registro deste dispositivo em dia.
   useEffect(() => {
@@ -168,10 +185,31 @@ export function Layout() {
                   <path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0" />
                 </svg>
               </button>
-              <div className={s.agente}>
-                <div aria-hidden="true" className={s.avatar}>
+              <div className={s.agente} data-menu-agente>
+                <button
+                  className={s.avatar}
+                  aria-label={`Agente ${nome}: opções`}
+                  aria-haspopup="menu"
+                  aria-expanded={menuAgente}
+                  onClick={() => setMenuAgente((v) => !v)}
+                >
                   {nome.charAt(0)}
-                </div>
+                </button>
+                {menuAgente && (
+                  <div role="menu" className={s.menu}>
+                    <span className={s.menuCabeca}>AGENTE {nome.toUpperCase()}</span>
+                    <button role="menuitem" className={s.menuItem} onClick={() => { setMenuAgente(false); setRenomeando(true) }}>
+                      Alterar codinome
+                    </button>
+                    <button role="menuitem" className={s.menuItem} onClick={() => { setMenuAgente(false); setAlertasAbertos(true) }}>
+                      Notificações
+                    </button>
+                    <div className={s.menuDivisor} />
+                    <button role="menuitem" className={`${s.menuItem} ${s.menuPerigo}`} onClick={sair}>
+                      Encerrar sessão
+                    </button>
+                  </div>
+                )}
                 <div className={s.agenteTexto}>
                   <span className={s.agenteNome}>Agente {nome}</span>
                   <button className={s.sair} onClick={sair}>
@@ -215,6 +253,7 @@ export function Layout() {
         {alertasAbertos && <Notificacoes onFechar={() => setAlertasAbertos(false)} />}
         {buscaAberta && <Busca onFechar={() => setBuscaAberta(false)} />}
         {novaAberta && <NovaMissao onFechar={() => setNovaAberta(false)} />}
+        {renomeando && <EditorCodinome onFechar={() => setRenomeando(false)} />}
         {emEdicao && <EditorTarefa key={emEdicao.id} tarefa={emEdicao} onFechar={fecharEditor} />}
       </div>
     </CentralContexto.Provider>

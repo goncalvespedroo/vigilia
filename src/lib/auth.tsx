@@ -9,6 +9,8 @@ interface AuthCtx {
   carregando: boolean
   entrar: (email: string, senha: string) => Promise<string | null>
   sair: () => Promise<void>
+  /** Grava o codinome (nome de exibição) na conta; vale em todos os dispositivos. */
+  renomear: (nome: string) => Promise<string | null>
 }
 
 const Ctx = createContext<AuthCtx | null>(null)
@@ -38,8 +40,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await supabase.auth.signOut({ scope: 'local' })
   }
 
+  async function renomear(nome: string) {
+    const limpo = nome.trim().replace(/\s+/g, ' ')
+    if (!limpo) return 'Informe um codinome.'
+    if (limpo.length > 40) return 'Use no máximo 40 caracteres.'
+    const { data, error } = await supabase.auth.updateUser({ data: { nome: limpo } })
+    if (error) return navigator.onLine ? 'Não foi possível salvar o codinome.' : 'Sem conexão: tente quando o canal voltar.'
+    if (data.user) setSessao((s) => (s ? { ...s, user: data.user } : s))
+    return null
+  }
+
   return (
-    <Ctx.Provider value={{ sessao, usuario: sessao?.user ?? null, carregando, entrar, sair }}>
+    <Ctx.Provider value={{ sessao, usuario: sessao?.user ?? null, carregando, entrar, sair, renomear }}>
       {children}
     </Ctx.Provider>
   )

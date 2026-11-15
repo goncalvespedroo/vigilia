@@ -304,3 +304,8 @@ h1, h2 {
 }
 
 .carregando__fantasma { height: 10px; background: var(--surface-alta); border-radius: 2px; }
+
+::placeholder { color: var(--text-2); opacity: 1; }
+
+/* Campos nativos (data/hora/seleção) no tema escuro */
+select option { background: var(--surface); color: var(--text); }

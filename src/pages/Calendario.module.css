@@ -36,7 +36,8 @@
   transition: border-color var(--t-rapida), box-shadow var(--t-rapida), background var(--t-rapida);
 }
 .dia:hover { border-color: var(--border-strong); }
-.dia[data-fora] { background: transparent; border-style: dashed; opacity: 0.55; }
+.dia[data-fora] { background: transparent; border-style: dashed; border-color: var(--divider); }
+.dia[data-fora] .chip { background: transparent; }
 .dia[data-hoje] { border-color: var(--success); }
 .dia[data-selecionado] { border-color: var(--accent); box-shadow: var(--brilho-forte); background: var(--surface-2); }
 .dia[data-soltando] { border-color: var(--accent); border-style: dashed; background: rgb(166 213 229 / 0.08); }
@@ -77,7 +78,7 @@
   font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.06em; color: var(--text-2);
 }
 .mais:hover { color: var(--accent); }
-.dica { margin: var(--e-2) 0 0; font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--text-off); }
+.dica { margin: var(--e-2) 0 0; font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--text-2); }
 
 /* ------------------------------------------------------------ Painel do dia */
 .diaTopo { display: flex; flex-direction: column; gap: 4px; padding-bottom: var(--e-3); border-bottom: 1px solid var(--border); }
@@ -94,7 +95,8 @@
   transition: box-shadow var(--t-rapida);
 }
 .reuniao:hover { box-shadow: var(--brilho-forte); }
-.reuniao[data-feito] { opacity: 0.6; }
+.reuniao[data-feito] { background: var(--surface-alta); border-color: var(--border); }
+.reuniao[data-feito] .reuniaoTitulo { color: var(--text-2); text-decoration: line-through; }
 .reuniaoHora { font-family: var(--f-mono); font-size: 12px; color: var(--accent); }
 .reuniaoTitulo { font-weight: 600; font-size: 14px; flex: 1; min-width: 0; }
 

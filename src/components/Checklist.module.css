@@ -35,7 +35,7 @@ details[open] > summary.cabeca { margin-bottom: var(--e-2); }
 .corpo { display: flex; flex-direction: column; gap: 6px; min-width: 0; flex: 1; }
 .titulo {
   background: none; border: 0; padding: 0; text-align: left; cursor: pointer;
-  font-size: 15px; line-height: 1.35; overflow-wrap: anywhere;
+  font-size: 15px; line-height: 1.35; overflow-wrap: anywhere; min-height: 24px;
 }
 .titulo:hover { color: var(--accent); }
 .linha[data-status='feito'] .titulo { color: var(--text-2); text-decoration: line-through; }
